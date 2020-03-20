@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PADDING -->
+    <dimen name="default_padding">24dp</dimen>
+
+    <!-- TEXT -->
+    <dimen name="default_text">18sp</dimen>
+    <dimen name="title_text">35sp</dimen>
+
+    <dimen name="main_header_base_height">175dp</dimen>
+</resources>

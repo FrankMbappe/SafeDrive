@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">SafeDrive</string>
+    <string name="app_name" translatable="false">SafeDrive</string>
+    <string name="str_brand">Brand</string>
+    <string name="str_cars">Cars</string>
+    <string name="str_choose_car_to_continue">Choose a car to continue</string>
+    <string name="str_refresh">Refresh</string>
+    <string name="str_view_list">List view</string>
+    <string name="str_view_carousel">Carousel view</string>
+    <string name="str_add_vehicle">Add a new vehicle</string>
+    <string name="str_vehicle_s_brand_logo">Vehicle\'s brand</string>
+    <string name="str_vehicle_type">Vehicle\'s type</string>
+    <string name="more">More</string>
+    <string name="str_app_logo">App logo</string>
+    <string name="str_new_vehicle">New vehicle</string>
+    <string name="str_brands">Brands</string>
+    <string name="str_choose_a_brand">Choose a brand</string>
+    <string name="str_next">Next</string>
+    <string name="str_search">Search...</string>
+    <string name="str_choose_model">Choose a model...</string>
 </resources>

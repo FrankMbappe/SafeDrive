@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_brand">Marque</string>
+    <string name="str_cars">Véhicules</string>
+    <string name="str_choose_car_to_continue">Choisissez un véhicule pour continuer</string>
+    <string name="str_refresh">Rafraîchir</string>
+    <string name="str_view_list">Vue liste</string>
+    <string name="str_view_carousel">Vue carousel</string>
+    <string name="str_add_vehicle">Ajouter un véhicule</string>
+    <string name="str_vehicle_s_brand_logo">Logo de la marque du vehicule</string>
+    <string name="str_vehicle_type">Type du véhicule</string>
+    <string name="str_app_logo">Logo de l\'application</string>
+    <string name="str_new_vehicle">Nouveau véhicule</string>
+    <string name="str_brands">Marques</string>
+    <string name="str_choose_a_brand">Choisissez une marque</string>
+    <string name="str_next">Suivant</string>
+    <string name="more">Plus</string>
+    <string name="str_search">Rechercher...</string>
+    <string name="str_choose_model">Choisissez un modèle</string>
+</resources>
