@@ -17,4 +17,13 @@
     <string name="str_next">Next</string>
     <string name="str_search">Search...</string>
     <string name="str_choose_model">Choose a model...</string>
+    <string name="str_no_data">No data.</string>
+    <string name="str_tank_capacity">Tank capacity</string>
+    <string name="str_distance_covered">Distance covered</string>
+    <string name="str_model">Model</string>
+    <string name="str_liters">Liters</string>
+    <string name="str_validate">Validate</string>
+    <string name="str_finalisation">Finalisation</string>
+    <string name="str_finalisation_description">You can edit the values that are not correct.</string>
+    <string name="str_pub_first_vehicle_description">Register your first vehicle and SafeDrive will keep it all.</string>
 </resources>

@@ -1,28 +1,30 @@
 package com.gm.safedrive.models;
 
 public class VehicleModel {
-    private static int SEQUENCE_VAL = 1;
+    //private static int SEQUENCE_VAL = 1;
 
-    private int id;
+    private String code;
     private Brand brand;
     private String name;
+    private  String description;
     private int releaseYear;
     private double tankCapacity;
     private VehicleType vehicleType;
     private SafeDriveStatistics statistics;
 
-    public VehicleModel(Brand brand, String name, int releaseYear, double tankCapacity, VehicleType vehicleType, SafeDriveStatistics statistics) {
-        this.id = SEQUENCE_VAL++;
+    public VehicleModel(String code, Brand brand, String name, String description, int releaseYear, double tankCapacity, VehicleType vehicleType, SafeDriveStatistics statistics) {
+        this.code = code;
         this.brand = brand;
         this.name = name;
+        this.description = description;
         this.releaseYear = releaseYear;
         this.tankCapacity = tankCapacity;
         this.vehicleType = vehicleType;
         this.statistics = statistics;
     }
 
-    public int getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
     public Brand getBrand() {
@@ -39,6 +41,14 @@ public class VehicleModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String text) {
+        this.description = text;
     }
 
     public int getReleaseYear() {

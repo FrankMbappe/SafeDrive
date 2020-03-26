@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_vehicle_default_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
-        android:id="@+id/item_vehicle_default"
+        android:id="@+id/item_vehicle_default_brand_logo"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:contentDescription="@string/str_vehicle_s_brand_logo"
@@ -24,7 +25,7 @@
         android:textColor="@android:color/black"
         android:text="BMW"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/item_vehicle_default"
+        app:layout_constraintStart_toEndOf="@id/item_vehicle_default_brand_logo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -36,7 +37,7 @@
         android:textColor="@android:color/black"
         android:text="M3 U28"
         android:textSize="40sp"
-        app:layout_constraintStart_toEndOf="@id/item_vehicle_default"
+        app:layout_constraintStart_toEndOf="@id/item_vehicle_default_brand_logo"
         app:layout_constraintTop_toBottomOf="@id/item_vehicle_brand" />
 
     <TextView
@@ -55,7 +56,7 @@
         android:contentDescription="@string/str_vehicle_type"
         android:layout_width="35sp"
         android:layout_height="35sp"
-        android:background="@drawable/ic_car_primary_24dp"
+        android:src="@drawable/ic_car_primary_24dp"
         app:layout_constraintTop_toBottomOf="@id/item_vehicle_matricule"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_vehicle_model"

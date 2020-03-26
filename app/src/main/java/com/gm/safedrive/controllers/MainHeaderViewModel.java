@@ -1,4 +1,4 @@
-package com.gm.safedrive;
+package com.gm.safedrive.controllers;
 
 import androidx.lifecycle.ViewModel;
 

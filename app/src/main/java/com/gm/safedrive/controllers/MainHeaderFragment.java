@@ -1,4 +1,4 @@
-package com.gm.safedrive;
+package com.gm.safedrive.controllers;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.gm.safedrive.R;
 
 public class MainHeaderFragment extends Fragment {
 

@@ -6,6 +6,6 @@
         android:bottom="20dp"
         android:top="20dp"/>
 
-    <solid android:color="@color/colorPrimary"/>
-    <corners android:radius="36dp"/>
+    <solid android:color="#FFF"/>
+    <corners android:radius="@dimen/default_padding"/>
 </shape>

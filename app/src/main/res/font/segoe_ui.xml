@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:font="@font/segoe_ui_regular"/>
+    <font android:font="@font/segoe_ui_regular_italic"/>
+    <font android:font="@font/segoe_ui_bold"/>
+    <font android:font="@font/segoe_ui_bold_italic"/>
+</font-family>

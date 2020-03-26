@@ -7,7 +7,7 @@ public class Brand {
     private String name;
     private int logoId;
 
-    public Brand(int id, String name, int logoId) {
+    public Brand(String name, int logoId) {
         this.id = SEQUENCE_VAL++;
         this.name = name;
         this.logoId = logoId;

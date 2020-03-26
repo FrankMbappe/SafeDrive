@@ -10,10 +10,11 @@ public class User {
     private String firstName;
     private String lastName;
     private String fullName;
+    private int profilePhotoId;
     private int phoneNumber;
     private String geographicPosition;
 
-    public User(String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, String geographicPosition) {
+    public User(String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, int profilePhotoId, String geographicPosition) {
         this.id = SEQUENCE_VAL++;
         this.createdDate = createdDate;
         this.email = email;
@@ -21,6 +22,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.profilePhotoId = profilePhotoId;
         this.geographicPosition = geographicPosition;
     }
 
@@ -83,5 +85,13 @@ public class User {
 
     public void setGeographicPosition(String geographicPosition) {
         this.geographicPosition = geographicPosition;
+    }
+
+    public int getProfilePhotoId() {
+        return profilePhotoId;
+    }
+
+    public void setProfilePhotoId(int id){
+        this.profilePhotoId = id;
     }
 }

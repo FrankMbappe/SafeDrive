@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BrandsActivity">
-    <fragment
+    tools:context=".controllers.BrandsActivity">
+    <include
+        layout="@layout/fragment_main_header"
         android:id="@+id/activity_brands_header"
         android:layout_width="match_parent"
         android:layout_height="175dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout="@layout/fragment_main_header"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
     <LinearLayout
         android:id="@+id/activity_brands_global_name_block"
         android:layout_width="match_parent"
@@ -87,7 +87,8 @@
         tools:listitem="@layout/item_brand_default"
         app:layout_constraintVertical_bias="0"/>
 
-    <fragment
+    <include
+        layout="@layout/fragment_search_bar"
         android:id="@+id/activity_brands_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,7 +96,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout="@layout/fragment_search_bar"
         app:layout_constraintVertical_bias="1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

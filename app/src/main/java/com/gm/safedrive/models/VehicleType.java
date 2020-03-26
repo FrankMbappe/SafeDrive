@@ -4,12 +4,12 @@ public class VehicleType {
     private static int SEQUENCE_VAL = 1;
 
     private int id;
-    private String name;
+    private int nameId;
     private int logoId;
 
-    public VehicleType(int id, String name, int logoId) {
+    public VehicleType(int nameId, int logoId) {
         this.id = SEQUENCE_VAL++;
-        this.name = name;
+        this.nameId = nameId;
         this.logoId = logoId;
     }
 
@@ -17,12 +17,12 @@ public class VehicleType {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public int getNameId() {
+        return nameId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameId(int nameId) {
+        this.nameId = nameId;
     }
 
     public int getLogoId() {

@@ -17,4 +17,13 @@
     <string name="more">Plus</string>
     <string name="str_search">Rechercher...</string>
     <string name="str_choose_model">Choisissez un modèle</string>
+    <string name="str_no_data">Aucune donnée.</string>
+    <string name="str_model">Modèle</string>
+    <string name="str_liters">Litres</string>
+    <string name="str_validate">Valider</string>
+    <string name="str_tank_capacity">Capacité du réservoir</string>
+    <string name="str_distance_covered">Distance parcourue</string>
+    <string name="str_finalisation">Finalisation</string>
+    <string name="str_finalisation_description">Vous pouvez modifier les paramètres qui vous semblent inexacts.</string>
+    <string name="str_pub_first_vehicle_description">Enregistrez votre premier véhicule et SafeDrive se charge de tout.</string>
 </resources>
