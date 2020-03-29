@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="175dp"
-    tools:context=".controllers.MainHeaderFragment"
+    tools:context=".controllers.fragments.MainHeaderFragment"
     android:background="@drawable/illustration_main_back_green"
     android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -37,7 +37,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/app_full_logo_light"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/fragment_header_control_more"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -46,17 +46,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@drawable/ic_more_vert_black_24dp"/>
-        <ImageView
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_header_profile_photo"
+            android:contentDescription="@string/more"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="@string/more"
             android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/fragment_header_control_more"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@android:color/white"
-            app:layout_constraintCircleRadius="50dp"/>
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FFF"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

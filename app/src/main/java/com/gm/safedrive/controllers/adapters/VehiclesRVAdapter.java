@@ -45,10 +45,9 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
         holder.mBrandLogo.setImageResource(mVehicles.get(position).getModel().getBrand().getLogoId());
         holder.mTypeImage.setImageResource(mVehicles.get(position).getModel().getVehicleType().getLogoId());
         holder.mBrandName.setText(mVehicles.get(position).getModel().getBrand().getName());
-        holder.mModelName.setText(mVehicles.get(position).getModel().getName());
+        holder.mModelName.setText(mVehicles.get(position).getModel().getReducedName());
         holder.mRegistrationNumber.setText(mVehicles.get(position).getRegistrationNumber());
         final int i = position;
-        boolean toggle = false;
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

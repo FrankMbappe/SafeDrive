@@ -26,4 +26,9 @@
     <string name="str_finalisation">Finalisation</string>
     <string name="str_finalisation_description">You can edit the values that are not correct.</string>
     <string name="str_pub_first_vehicle_description">Register your first vehicle and SafeDrive will keep it all.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_main_header_item_1">Item 1</string>
+    <string name="menu_main_header_item_2">Item 2</string>
 </resources>

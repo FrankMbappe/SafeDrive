@@ -8,4 +8,5 @@
     <dimen name="title_text">35sp</dimen>
 
     <dimen name="main_header_base_height">175dp</dimen>
+    <dimen name="medium_text">28sp</dimen>
 </resources>

@@ -1,16 +1,20 @@
 package com.gm.safedrive.data;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.gm.safedrive.banks.ModelBank;
 import com.gm.safedrive.banks.UserBank;
 import com.gm.safedrive.models.User;
 import com.gm.safedrive.models.Vehicle;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DbManager extends SQLiteOpenHelper {
@@ -19,15 +23,29 @@ public class DbManager extends SQLiteOpenHelper {
         super(context, Db.DATABASE_NAME, null, Db.DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Db.QUERY_CREATE_TABLE_LOGGED_ACCOUNTS);
-        db.execSQL(Db.QUERY_CREATE_TABLE_VEHICLES);
-        Log.i("DATABASE", "onCreate invoked");
-        insertUser(UserBank.SESSION);
-    }
+
+    // La date et l'heure de maintenant sous forme de chaîne
+
+    private String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
 
     @Override
+    public void onCreate(SQLiteDatabase db) {
+        try{
+            db.execSQL(Db.QUERY_CREATE_TABLE_LOGGED_ACCOUNTS);
+            db.execSQL(Db.QUERY_CREATE_TABLE_VEHICLES);
+        }catch (SQLException sqlex){
+            try {
+                throw new IOException(sqlex);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+
+        Log.i("DATABASE", "onCreate invoked");
+
+    }
+
+    @Override //Méthode appelée lorsque la version de la BD évolue
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE if exists logged_accounts");
         db.execSQL("DROP TABLE if exists vehicles");
@@ -35,8 +53,19 @@ public class DbManager extends SQLiteOpenHelper {
         Log.i("DATABASE", "onUpgrade invoked");
     }
 
+
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //------------------    /*          PROCEDURES STOCKEES             */      --------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+
+
+    // Insère un nouveau véhicule dans la BD
+
     public void insertVehicle(Vehicle vehicle){
-        String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
         this.getWritableDatabase().execSQL(
             Db.QUERY_INSERT_VEHICLE(
                     vehicle.getOwner().getId(),
@@ -51,8 +80,41 @@ public class DbManager extends SQLiteOpenHelper {
         Log.i("DATABASE",now + ": new Vehicle added. (insertVehicle was successful)");
     }
 
+
+
+    // Récupère la liste des véhicules d'un utilisateur
+
+    public ArrayList<Vehicle> getSessionUserVehicles(){
+        ModelBank modelBank = new ModelBank();
+
+        ArrayList<Vehicle> vehicleList = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().rawQuery(Db.QUERY_GET_USER_VEHICLES(UserBank.SESSION.getId()), null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            vehicleList.add(
+                    new Vehicle(
+                            UserBank.SESSION,
+                            cursor.getString(cursor.getColumnIndexOrThrow("created_date")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("registration_number")),
+                            modelBank.getModelByCode(cursor.getString(cursor.getColumnIndexOrThrow("model_code"))),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow("tank_capacity")),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow("distance_covered")),
+                            null
+                    )
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.i("DATABASE",now + ": " + vehicleList.size() + " item(s) sent. (getSessionUserVehicles was successful)");
+        return vehicleList;
+    }
+
+
+
+
+    // Insère un nouvel utilisateur dans la BD
+
     public void insertUser(User user){
-        String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
         this.getWritableDatabase().execSQL(
             Db.QUERY_INSERT_USER(
                     now,
@@ -62,14 +124,44 @@ public class DbManager extends SQLiteOpenHelper {
                     user.getFirstName(),
                     user.getLastName(),
                     user.getPhoneNumber(),
-                    "-"
+                    now
             )
         );
         Log.i("DATABASE",now + ": new User added. (insertUser was successful)");
     }
 
+
+
+    // Retourne un objet utilisateur à partir d'un id
+
+    public User getUserById(int user_id){
+        ArrayList<User> users = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().rawQuery(Db.QUERY_GET_USER(user_id), null);
+        cursor.moveToFirst();
+        if(!cursor.isAfterLast()){
+            User user = new User(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("created_date")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("password")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("first_name")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("last_name")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("phone_number")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("profile_photo_id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("last_time_connected")),
+                    null
+            );
+            Log.i("DATABASE",now + ": user " + user_id + "'s was been found [" + user.getFullName().toUpperCase() + "]. (getUserById was successful)");
+            cursor.close();
+            return user;
+        }
+        return null;
+    }
+
+
+    // Met à jour la dernière date de connexion d'un utilisateur
+
     public void userUpdateLastLogin(int id){
-        String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
         this.getWritableDatabase().execSQL(Db.QUERY_UPDATE_USER_LAST_LOGIN(id, now));
         Log.i("DATABASE",now + ": user " + id + " was updated. (userUpdateLastLogin was successful)");
     }

@@ -6,6 +6,7 @@ public class VehicleModel {
     private String code;
     private Brand brand;
     private String name;
+    private String reducedName;
     private  String description;
     private int releaseYear;
     private double tankCapacity;
@@ -41,6 +42,10 @@ public class VehicleModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getReducedName(){
+        return (name.length() >= 10) ? name.substring(0,9) + "..." : name;
     }
 
     public String getDescription() {

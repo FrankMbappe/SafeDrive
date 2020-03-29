@@ -1,9 +1,8 @@
 package com.gm.safedrive.banks;
 
-import com.gm.safedrive.R;
+import com.gm.safedrive.banks.dictionnaries.ModelDictionnary;
 import com.gm.safedrive.banks.interfaces.IBank;
 import com.gm.safedrive.models.VehicleModel;
-import com.gm.safedrive.models.VehicleType;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class ModelBank implements IBank<VehicleModel> {
 
         mModels.add(
                 new VehicleModel(
-                        "BMWM3U282003",
+                        ModelDictionnary.CODE_BMWM3U282003,
                         brandBank.getBrand("BMW"),
                         "M3 U28",
                         "This vehicle were saved for test.",
@@ -30,7 +29,7 @@ public class ModelBank implements IBank<VehicleModel> {
 
         mModels.add(
                 new VehicleModel(
-                        "MBCCLASS300",
+                        ModelDictionnary.CODE_MBCCLASS300,
                         brandBank.getBrand("Mercedes"),
                         "C-CLASS 300",
                         "This vehicle were saved for test.",
@@ -47,10 +46,19 @@ public class ModelBank implements IBank<VehicleModel> {
         return mModels;
     }
 
-    public VehicleModel getModel(String name){
-        for (VehicleModel brand : mModels) {
-            if(brand.getName().toLowerCase().contains(name.toLowerCase())){
-                return brand;
+    public VehicleModel getModelByName(String name){
+        for (VehicleModel model : mModels) {
+            if(model.getName().toLowerCase().contains(name.toLowerCase())){
+                return model;
+            }
+        }
+        return null;
+    }
+
+    public VehicleModel getModelByCode(String code){
+        for (VehicleModel model : mModels) {
+            if(model.getCode().equals(code)){
+                return model;
             }
         }
         return null;

@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controllers.BrandModelsActivity">
-    <include
-        layout="@layout/fragment_main_header"
+    <fragment
         android:id="@+id/activity_brand_models_header"
+        android:name="com.gm.safedrive.controllers.fragments.MainHeaderFragment"
+        tools:layout="@layout/fragment_main_header"
         android:layout_width="match_parent"
         android:layout_height="175dp"
         app:layout_constraintTop_toTopOf="parent"

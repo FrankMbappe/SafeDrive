@@ -1,5 +1,8 @@
 package com.gm.safedrive;
 
+import com.gm.safedrive.banks.ModelBank;
+import com.gm.safedrive.banks.dictionnaries.ModelDictionnary;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,5 +16,9 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+    @Test
+    public void returning_right_model(){
+        assertEquals(ModelDictionnary.CODE_MBCCLASS300, new ModelBank().getModelByName("c-class").getCode());
     }
 }

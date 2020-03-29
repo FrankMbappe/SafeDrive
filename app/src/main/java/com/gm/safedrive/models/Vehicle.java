@@ -9,10 +9,10 @@ public class Vehicle {
     private String registrationNumber;
     private VehicleModel model;
     private double tankCapacity;
-    private int distanceCovered;
+    private double distanceCovered;
     private SafeDriveStatistics statistics;
 
-    public Vehicle(User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, int distanceCovered,  SafeDriveStatistics statistics) {
+    public Vehicle(User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
         this.id = SEQUENCE_VAL++;
         this.owner = owner;
         this.createdDate = createdDate;
@@ -63,11 +63,11 @@ public class Vehicle {
         this.tankCapacity = tankCapacity;
     }
 
-    public int getDistanceCovered() {
+    public double getDistanceCovered() {
         return distanceCovered;
     }
 
-    public void setDistanceCovered(int distanceCovered) {
+    public void setDistanceCovered(double distanceCovered) {
         this.distanceCovered = distanceCovered;
     }
 
