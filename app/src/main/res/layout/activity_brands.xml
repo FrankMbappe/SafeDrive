@@ -27,72 +27,29 @@
         app:layout_constraintTop_toBottomOf="@id/activity_brands_header">
 
         <TextView
+            android:id="@+id/activity_brands_choose_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="@string/str_brands"
-            android:textSize="@dimen/title_text"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarker"
             android:text="@string/str_choose_a_brand"
-            android:textSize="@dimen/default_text"
+            android:textSize="25sp"
             />
     </LinearLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_brands_main_controls_block"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_brands_global_name_block">
-
-        <ImageButton
-            android:id="@+id/activity_brands_control_view_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorTransparent"
-            android:src="@drawable/ic_view_list_gray_48dp"
-            android:contentDescription="@string/str_view_list"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            />
-        <ImageButton
-            android:id="@+id/activity_brands_control_view_carousel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorTransparent"
-            android:src="@drawable/ic_view_carousel_gray_48dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/str_view_carousel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/activity_brands_control_view_list"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_vehicles_recyclerview"
+        android:id="@+id/activity_brands_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/activity_brands_main_controls_block"
+        app:layout_constraintTop_toBottomOf="@id/activity_brands_global_name_block"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_brand_default"
         app:layout_constraintVertical_bias="0"/>
 
-    <include
-        layout="@layout/fragment_search_bar"
+    <fragment
         android:id="@+id/activity_brands_search_bar"
+        tools:layout="@layout/fragment_search_bar"
+        android:name="com.gm.safedrive.controllers.fragments.SearchBarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

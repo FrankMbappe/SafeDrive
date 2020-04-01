@@ -2,6 +2,8 @@ package com.gm.safedrive.banks;
 
 import com.gm.safedrive.banks.dictionnaries.ModelDictionnary;
 import com.gm.safedrive.banks.interfaces.IBank;
+import com.gm.safedrive.models.Brand;
+import com.gm.safedrive.models.Vehicle;
 import com.gm.safedrive.models.VehicleModel;
 
 import java.util.ArrayList;
@@ -63,4 +65,27 @@ public class ModelBank implements IBank<VehicleModel> {
         }
         return null;
     }
+
+    public ArrayList<VehicleModel> getModelsByBrand(Brand brand){
+        ArrayList<VehicleModel> models = new ArrayList<>();
+        for (VehicleModel currentModel : mModels) {
+            if(currentModel.getBrand().getName().toLowerCase().equals(brand.getName().toLowerCase())){
+                models.add(currentModel);
+            }
+        }
+        return models;
+    }
+
+    public ArrayList<VehicleModel> getModels(Brand brand, String search){
+        ArrayList<VehicleModel> models = new ArrayList<>();
+        for (VehicleModel currentModel : mModels) {
+            if(currentModel.getBrand().getName().toLowerCase().equals(brand.getName().toLowerCase())
+                && currentModel.getName().toLowerCase().contains(search.toLowerCase())){
+
+                models.add(currentModel);
+            }
+        }
+        return models;
+    }
+
 }

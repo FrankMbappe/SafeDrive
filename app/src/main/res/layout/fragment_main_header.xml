@@ -45,7 +45,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/ic_more_vert_black_24dp"/>
+            android:background="@drawable/ic_more_vert_black_24dp"
+            android:onClick="showMainHeaderMenu"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_header_profile_photo"

@@ -67,6 +67,7 @@
 
     <fragment
         android:id="@+id/activity_brand_models_search_bar"
+        android:name="com.gm.safedrive.controllers.fragments.SearchBarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

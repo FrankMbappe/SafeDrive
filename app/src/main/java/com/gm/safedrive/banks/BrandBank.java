@@ -57,4 +57,14 @@ public class BrandBank implements IBank<Brand> {
         return null;
     }
 
+    public ArrayList<Brand> getBrands(String search){
+        ArrayList<Brand> brands = new ArrayList<>();
+        for (Brand currentBrand : mBrands) {
+            if(currentBrand.getName().toLowerCase().contains(search.toLowerCase())){
+                brands.add(currentBrand);
+            }
+        }
+        return brands;
+    }
+
 }

@@ -79,7 +79,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/activity_final_c_header">
+                app:layout_constraintTop_toBottomOf="@id/activity_final_c_header"
+                android:paddingBottom="150dp">
+
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="3">
+                        <ImageView
+                            android:id="@+id/mlg0"
+                            android:background="#000"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+                        <TextView
+                            android:id="@+id/mtxt0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_registration_number"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/mlg0"
+                            android:layout_marginStart="16dp"
+                            android:textColor="#000"
+                            android:textSize="20sp"/>
+                        <EditText
+                            android:id="@+id/activity_final_c_vehicle_registration_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/str_registration_input"
+                            android:textSize="30sp"
+                            android:textAlignment="textEnd"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/mtxt0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:baselineAligned="false"
@@ -112,7 +159,6 @@
                             android:textSize="20sp"/>
                         <EditText
                             android:id="@+id/activity_final_c_vehicle_brand_input"
-                            android:inputType="text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Brand input"
@@ -188,7 +234,6 @@
                             android:id="@+id/activity_final_c_vehicle_model_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
                             android:hint="Model input"
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
@@ -205,7 +250,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
                         <ImageView
-                            android:id="@id/activity_final_c_vehicle_brand_logo"
+                            android:id="@+id/activity_final_c_vehicle_brand_model_logo"
                             android:layout_width="match_parent"
                             android:layout_height="96dp"
                             app:layout_constraintTop_toTopOf="parent"
@@ -213,18 +258,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:src="@drawable/brand_color_bmw"/>
-                        <ImageView
-                            android:id="@id/lgcheck"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.85"
-                            app:layout_constraintVertical_bias="0.85"
-                            android:src="@drawable/ic_check_circle_primary_36dp"
-                            />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>

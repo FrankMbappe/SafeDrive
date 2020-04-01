@@ -12,10 +12,10 @@
     <string name="str_app_logo">Logo de l\'application</string>
     <string name="str_new_vehicle">Nouveau véhicule</string>
     <string name="str_brands">Marques</string>
-    <string name="str_choose_a_brand">Choisissez une marque</string>
+    <string name="str_choose_a_brand">Choisissez une marque :</string>
     <string name="str_next">Suivant</string>
     <string name="more">Plus</string>
-    <string name="str_search">Rechercher...</string>
+    <string name="str_search">Rechercher…</string>
     <string name="str_choose_model">Choisissez un modèle</string>
     <string name="str_no_data">Aucune donnée.</string>
     <string name="str_model">Modèle</string>
@@ -26,4 +26,9 @@
     <string name="str_finalisation">Finalisation</string>
     <string name="str_finalisation_description">Vous pouvez modifier les paramètres qui vous semblent inexacts.</string>
     <string name="str_pub_first_vehicle_description">Enregistrez votre premier véhicule et SafeDrive se charge de tout.</string>
+    <string name="hello_blank_fragment">Fragment vide</string>
+    <string name="menu_main_header_item_settings">Paramètres</string>
+    <string name="menu_main_header_item_logout">Se déconnecter</string>
+    <string name="str_registration_number">Numéro d\'immatriculation</string>
+    <string name="str_registration_input">Immatriculation</string>
 </resources>
