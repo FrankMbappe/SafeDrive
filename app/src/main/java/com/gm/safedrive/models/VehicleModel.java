@@ -7,6 +7,7 @@ public class VehicleModel {
     private Brand brand;
     private String name;
     private String reducedName;
+    private String fullName;
     private  String description;
     private int releaseYear;
     private double tankCapacity;
@@ -46,6 +47,10 @@ public class VehicleModel {
 
     public String getReducedName(){
         return (name.length() >= 10) ? name.substring(0,9) + "..." : name;
+    }
+
+    public String getFullName(){
+        return brand.getName() + " " + name + " " + (releaseYear + "").substring(2) + "'";
     }
 
     public String getDescription() {

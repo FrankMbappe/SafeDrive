@@ -8,4 +8,7 @@ public class ModelDictionnary {
 
     // MERCEDES-BENZ
     public static final String CODE_MBCCLASS300 = "MBCCLASS300";
+
+    // TOYOTA
+    public static final String CODE_TOYOTACARINAE = "TOYOTACARINAE";
 }

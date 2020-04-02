@@ -26,29 +26,20 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <include
-                layout="@layout/fragment_header_primary"
-                android:id="@+id/activity_final_c_head"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
 
             <LinearLayout
                 android:id="@+id/activity_final_c_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/activity_final_c_head"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="vertical"
-                android:padding="48dp">
+                android:padding="48dp"
+                android:layout_marginTop="80dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="96dp"
@@ -119,6 +110,7 @@
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
                             android:layout_marginTop="5dp"
+                            android:background="@drawable/modern_rounded_textbox_light_gray"
                             app:layout_constraintTop_toBottomOf="@id/mtxt0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -161,10 +153,11 @@
                             android:id="@+id/activity_final_c_vehicle_brand_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Brand input"
+                            android:hint="@string/str_brand_input"
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
                             android:layout_marginTop="5dp"
+                            android:background="@drawable/modern_rounded_textbox_light_gray"
                             app:layout_constraintTop_toBottomOf="@id/mtxt1"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -180,11 +173,11 @@
                             android:id="@+id/activity_final_c_vehicle_brand_logo"
                             android:layout_width="match_parent"
                             android:layout_height="96dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:src="@drawable/brand_color_bmw"/>
+
                         <ImageView
                             android:id="@+id/lgcheck"
                             android:layout_width="36dp"
@@ -195,8 +188,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.85"
                             app:layout_constraintVertical_bias="0.85"
-                            android:src="@drawable/ic_check_circle_primary_36dp"
-                            />
+                            android:src="@drawable/ic_check_circle_primary_36dp"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
@@ -234,10 +226,11 @@
                             android:id="@+id/activity_final_c_vehicle_model_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Model input"
+                            android:hint="@string/str_model_input"
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
                             android:layout_marginTop="5dp"
+                            android:background="@drawable/modern_rounded_textbox_light_gray"
                             app:layout_constraintTop_toBottomOf="@id/mtxt2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -253,7 +246,6 @@
                             android:id="@+id/activity_final_c_vehicle_brand_model_logo"
                             android:layout_width="match_parent"
                             android:layout_height="96dp"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -296,10 +288,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:hint="Tank capacity"
+                            android:hint="@string/str_tank_capacity"
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
                             android:layout_marginTop="5dp"
+                            android:background="@drawable/modern_rounded_textbox_light_gray"
                             app:layout_constraintTop_toBottomOf="@id/mtxt3"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -316,6 +309,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="16dp"
+                            android:layout_marginStart="12dp"
                             android:fontFamily="sans-serif-black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -362,6 +356,7 @@
                             android:textSize="30sp"
                             android:textAlignment="textEnd"
                             android:layout_marginTop="5dp"
+                            android:background="@drawable/modern_rounded_textbox_light_gray"
                             app:layout_constraintTop_toBottomOf="@id/mtxt4"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -378,6 +373,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="16dp"
+                            android:layout_marginStart="8dp"
                             android:fontFamily="sans-serif-black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -391,5 +387,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include
+        layout="@layout/fragment_header_primary"
+        android:id="@+id/activity_final_c_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

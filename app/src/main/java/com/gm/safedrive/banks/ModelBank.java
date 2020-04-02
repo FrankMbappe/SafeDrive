@@ -41,6 +41,19 @@ public class ModelBank implements IBank<VehicleModel> {
                         null
                 )
         );
+
+        mModels.add(
+                new VehicleModel(
+                        ModelDictionnary.CODE_TOYOTACARINAE,
+                        brandBank.getBrand("Toyota"),
+                        "CARINA E",
+                        "This vehicle were saved for test.",
+                        2004,
+                        7.5,
+                        vehicleTypeBank.getAll().get(0),
+                        null
+                )
+        );
     }
 
     @Override

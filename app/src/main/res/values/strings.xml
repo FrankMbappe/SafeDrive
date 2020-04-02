@@ -33,4 +33,9 @@
     <string name="menu_main_header_item_logout">Log out</string>
     <string name="str_registration_number">Registration number</string>
     <string name="str_registration_input">Registration input</string>
+    <string name="str_error_values_finalc">An error occured : Please make sure you\'ve entered a registration number and that the tank capacity is more than 0 (zero).</string>
+    <string name="str_notification_well_done">Save done !</string>
+    <string name="str_notification_save_vehicle_description">Well done, your vehicle was successfully saved. You can now using it in SafeDrive app.</string>
+    <string name="str_brand_input">Brand input</string>
+    <string name="str_model_input">Model input</string>
 </resources>

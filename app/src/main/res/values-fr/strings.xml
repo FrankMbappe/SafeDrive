@@ -31,4 +31,9 @@
     <string name="menu_main_header_item_logout">Se déconnecter</string>
     <string name="str_registration_number">Numéro d\'immatriculation</string>
     <string name="str_registration_input">Immatriculation</string>
+    <string name="str_error_values_finalc">Une erreur est survenue : Veuillez vérifier que vous avez entré un numéro d\'immatriculation et que la capacité de votre réservoir est supérieure à 0 (zéro).</string>
+    <string name="str_notification_well_done">Enregistrement effectué !</string>
+    <string name="str_notification_save_vehicle_description">"Opération terminée ! L'enregistrement de votre véhicule a été effectué avec succès. Vous pouvez maintenant l'utiliser dans l'application SafeDrive. "</string>
+    <string name="str_brand_input">Marque</string>
+    <string name="str_model_input">Modèle</string>
 </resources>
