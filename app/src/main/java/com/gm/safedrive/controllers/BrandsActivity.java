@@ -3,9 +3,12 @@ package com.gm.safedrive.controllers;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.gm.safedrive.R;
@@ -21,6 +24,7 @@ public class BrandsActivity extends MainHeaderActivityUser {
 
     private RecyclerView mBrandsRecyclerview;
     private LinearLayout mLinearLayout;
+    private ImageButton mSkipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,15 @@ public class BrandsActivity extends MainHeaderActivityUser {
         setContentView(R.layout.activity_brands);
 
         mLinearLayout = findViewById(R.id.activity_brands_global_name_block);
+        mSkipButton = findViewById(R.id.activity_brands_skip_btn);
+
+        final Context thisContext = this;
+        mSkipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(thisContext, FinalCVehicleActivity.class));
+            }
+        });
 
         BrandBank brandBank = new BrandBank();
         Log.d(TAG, "Brand bank has " + brandBank.getAll().size() + " item(s).");

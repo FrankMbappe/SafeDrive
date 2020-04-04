@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-black"
         android:textColor="@android:color/black"
-        android:text="BMW"
+        android:text="Mercedes-Benz"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/item_vehicle_default_brand_logo"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,31 +37,37 @@
         android:fontFamily="sans-serif-light"
         android:text="M3 U28"
         android:textColor="@android:color/black"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toStartOf="@+id/item_vehicle_type_image"
+        android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@id/item_vehicle_default_brand_logo"
         app:layout_constraintTop_toBottomOf="@id/item_vehicle_brand"
         app:layout_constraintHorizontal_bias="0"/>
 
-    <TextView
-        android:id="@+id/item_vehicle_matricule"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="sans-serif-black"
-        android:text="LT800BE"
-        android:textSize="18sp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/item_vehicle_matricule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="LT800BE"
+            android:layout_alignParentTop="true"
+            android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/item_vehicle_type_image"
-        android:contentDescription="@string/str_vehicle_type"
-        android:layout_width="35sp"
-        android:layout_height="35sp"
-        android:src="@drawable/ic_car_primary_24dp"
-        app:layout_constraintTop_toBottomOf="@id/item_vehicle_matricule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/item_vehicle_type_image"
+            android:contentDescription="@string/str_vehicle_type"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:src="@drawable/ic_car_primary_24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@id/item_vehicle_matricule"
+            />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

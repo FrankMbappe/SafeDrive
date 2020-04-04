@@ -1,7 +1,11 @@
 package com.gm.safedrive.controllers;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gm.safedrive.R;
 import com.gm.safedrive.banks.ModelBank;
 import com.gm.safedrive.banks.UserBank;
+import com.gm.safedrive.banks.VehicleTypeBank;
 import com.gm.safedrive.controllers.adapters.ModelsRVAdapter;
 import com.gm.safedrive.controllers.interfaces.MainHeaderActivityUser;
 import com.gm.safedrive.models.Brand;
@@ -27,6 +32,7 @@ public class BrandModelsActivity extends MainHeaderActivityUser {
     private ImageView mCurrentBrandLogo;
     private TextView mCurrentBrandName;
     private RecyclerView mModelsRecyclerView;
+    private Button mCreateNewModelBtn;
     private Brand mCurrentBrand;
 
     @Override
@@ -43,9 +49,25 @@ public class BrandModelsActivity extends MainHeaderActivityUser {
         }
         mCurrentBrandLogo = findViewById(R.id.activity_brand_models_brand_logo);
         mCurrentBrandName = findViewById(R.id.activity_brand_models_brand_name);
+        mCreateNewModelBtn = findViewById(R.id.activity_brand_models_new_model_btn);
 
         mCurrentBrandLogo.setImageResource(mCurrentBrand.getLogoId());
         mCurrentBrandName.setText(mCurrentBrand.getName());
+
+        final Context thisContext = this;
+        mCreateNewModelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(thisContext, FinalCVehicleActivity.class);
+
+                VehicleModel defaultModel = new VehicleModel("", mCurrentBrand, "", "", 2020, 0, new VehicleTypeBank().getAll().get(0), null);
+
+                // Je convertis l'objet marque choisi en String grâce à Gson et je l'envoie à l'autre activité avec un putExtra
+                Gson gson = new GsonBuilder().create();
+                intent.putExtra(FinalCVehicleActivity.EXTRA_CURRENT_MODEL, gson.toJson(defaultModel));
+                thisContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

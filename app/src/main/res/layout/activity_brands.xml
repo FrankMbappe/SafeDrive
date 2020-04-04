@@ -58,4 +58,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="1"/>
 
+    <ImageButton
+        android:id="@+id/activity_brands_skip_btn"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_margin="@dimen/default_padding"
+        android:background="@drawable/modern_rounded_button_primary"
+        app:layout_constraintBottom_toTopOf="@+id/activity_brands_search_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_add_white_36dp"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="1"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

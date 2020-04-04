@@ -53,12 +53,26 @@
                 />
         </LinearLayout>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/activity_brand_models_new_model_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/activity_brand_models_global_name_block"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Créer un modèle"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:padding="@dimen/default_padding"
+        android:layout_margin="8dp"
+        android:drawableStart="@drawable/ic_add_black_24dp"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_brand_models_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/activity_brand_models_global_name_block"
+        app:layout_constraintTop_toBottomOf="@id/activity_brand_models_new_model_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
