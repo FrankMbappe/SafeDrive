@@ -1,8 +1,6 @@
 package com.gm.safedrive.models;
 
 public class Vehicle {
-    private static int SEQUENCE_VAL = 1;
-
     private int id;
     private User owner;
     private String createdDate;
@@ -12,8 +10,8 @@ public class Vehicle {
     private double distanceCovered;
     private SafeDriveStatistics statistics;
 
-    public Vehicle(User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
-        this.id = SEQUENCE_VAL++;
+    public Vehicle(int id, User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
+        this.id = id;
         this.owner = owner;
         this.createdDate = createdDate;
         this.registrationNumber = registrationNumber;
@@ -21,6 +19,20 @@ public class Vehicle {
         this.tankCapacity = tankCapacity;
         this.distanceCovered = distanceCovered;
         this.statistics = statistics;
+    }
+
+    public Vehicle(User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
+        this.owner = owner;
+        this.createdDate = createdDate;
+        this.registrationNumber = registrationNumber;
+        this.model = model;
+        this.tankCapacity = tankCapacity;
+        this.distanceCovered = distanceCovered;
+        this.statistics = statistics;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public User getOwner() {

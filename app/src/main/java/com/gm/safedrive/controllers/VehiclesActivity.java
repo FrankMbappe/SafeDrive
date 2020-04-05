@@ -28,7 +28,6 @@ public class VehiclesActivity extends AppCompatActivity {
     private ArrayList<Vehicle> mVehicles = new ArrayList<>();
     private DbManager db;
 
-    private Button mBtnNext;
     private ImageButton mControlAddVehicle;
     private ImageButton mControlRefreshList;
     private ImageButton mBtnSetListView;
@@ -42,13 +41,10 @@ public class VehiclesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehicles);
         Log.d(TAG, "onCreate: started.");
 
-        mBtnNext = findViewById(R.id.activity_vehicles_next_btn);
         mControlAddVehicle = findViewById(R.id.activity_vehicles_control_add);
         mControlRefreshList = findViewById(R.id.activity_vehicles_control_refresh);
         mBtnSetListView = findViewById(R.id.activity_vehicles_control_view_list);
         mBtnSetCarouselView = findViewById(R.id.activity_vehicles_control_view_carousel);
-
-        mBtnNext.setEnabled(false); mBtnNext.setVisibility(View.INVISIBLE);
 
         mControlAddVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +117,7 @@ public class VehiclesActivity extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: started.");
 
         mUsersVehiclesRecyclerview = findViewById(R.id.activity_vehicles_recyclerview);
-        VehiclesRVAdapter adapter = new VehiclesRVAdapter(this, mVehicles, mBtnNext);
+        VehiclesRVAdapter adapter = new VehiclesRVAdapter(this, mVehicles);
         mUsersVehiclesRecyclerview.setAdapter(adapter);
         mUsersVehiclesRecyclerview.setLayoutManager(new LinearLayoutManager(this));
     }

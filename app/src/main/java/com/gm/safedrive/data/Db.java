@@ -86,6 +86,8 @@ public class Db {
         "       id INTEGER PRIMARY KEY AUTOINCREMENT," +
         "       user_id INTEGER," +
         "       model_code TEXT," +
+        "       brand_name TEXT," +
+        "       model_name TEXT," +
         "       created_date TEXT," +
         "       registration_number TEXT," +
         "       description TEXT," +
@@ -94,12 +96,14 @@ public class Db {
         "       FOREIGN KEY(user_id) REFERENCES " + TABLE_NAME_USERS + "(id)" +
         ")";
 
-    public static String QUERY_INSERT_VEHICLE(int user_id, String model_code, String created_date,
+    public static String QUERY_INSERT_VEHICLE(int user_id, String model_code, String brand_name, String model_name, String created_date,
                   String registration_number, String description, double tank_capacity, double distance_covered){
 
         return "INSERT INTO " + TABLE_NAME_VEHICLES + "(" +
                     "user_id," +
                     "model_code," +
+                    "brand_name," +
+                    "model_name," +
                     "created_date," +
                     "registration_number," +
                     "description," +
@@ -109,12 +113,20 @@ public class Db {
                 "VALUES (" +
                     user_id + "," +
                     stringConvert(model_code) + "," +
+                    stringConvert(brand_name) + "," +
+                    stringConvert(model_name) + "," +
                     stringConvert(created_date) + "," +
                     stringConvert(registration_number) + "," +
                     stringConvert(description) + "," +
                     tank_capacity + "," +
                     distance_covered +
                 ")";
+    }
+
+    public static String QUERY_DELETE_VEHICLE(int id, int user_id){
+        return "DELETE FROM " + TABLE_NAME_VEHICLES +
+                " WHERE id = " + id +
+                " AND user_id = " + user_id;
     }
 
     public static String QUERY_GET_USER_VEHICLES(int user_id){

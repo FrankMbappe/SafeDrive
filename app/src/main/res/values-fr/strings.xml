@@ -36,4 +36,12 @@
     <string name="str_notification_save_vehicle_description">"Opération terminée ! L'enregistrement de votre véhicule a été effectué avec succès. Vous pouvez maintenant l'utiliser dans l'application SafeDrive. "</string>
     <string name="str_brand_input">Marque</string>
     <string name="str_model_input">Modèle</string>
+    <string name="str_show">Afficher</string>
+    <string name="str_load">Charger</string>
+    <string name="str_delete">Supprimer</string>
+    <string name="str_added_on">Ajouté le</string>
+    <string name="str_registration">Immatriculation :</string>
+    <string name="str_default_tank_cap">Cap. réservoir (par défaut) :</string>
+    <string name="str_current_tank_cap">Cap. réservoir (actuelle) :</string>
+    <string name="str_dot_distance_covered">Kilométrage :</string>
 </resources>

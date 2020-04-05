@@ -38,4 +38,12 @@
     <string name="str_notification_save_vehicle_description">Well done, your vehicle was successfully saved. You can now using it in SafeDrive app.</string>
     <string name="str_brand_input">Brand input</string>
     <string name="str_model_input">Model input</string>
+    <string name="str_show">Show</string>
+    <string name="str_load">Load</string>
+    <string name="str_delete">Delete</string>
+    <string name="str_added_on">Added on</string>
+    <string name="str_registration">Registration :</string>
+    <string name="str_default_tank_cap">Default tank cap. :</string>
+    <string name="str_current_tank_cap">Current tank cap. :</string>
+    <string name="str_dot_distance_covered">Distance covered :</string>
 </resources>

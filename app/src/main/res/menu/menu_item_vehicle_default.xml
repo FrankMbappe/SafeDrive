@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/menu_item_vehicle_show"
+            android:icon="@drawable/ic_open_in_new_black_24dp"
+            android:title="@string/str_show"
+            />
+        <item
+            android:id="@+id/menu_item_vehicle_load"
+            android:icon="@drawable/ic_play_arrow_black_24dp"
+            android:title="@string/str_load"
+            />
+        <item
+            android:id="@+id/menu_item_vehicle_delete"
+            android:icon="@drawable/ic_delete_forever_black_24dp"
+            android:title="@string/str_delete"
+            />
+=</menu>

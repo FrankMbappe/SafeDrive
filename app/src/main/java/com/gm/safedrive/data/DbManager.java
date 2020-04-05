@@ -7,10 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.gm.safedrive.banks.BrandBank;
 import com.gm.safedrive.banks.ModelBank;
 import com.gm.safedrive.banks.UserBank;
+import com.gm.safedrive.banks.VehicleTypeBank;
+import com.gm.safedrive.models.Brand;
 import com.gm.safedrive.models.User;
 import com.gm.safedrive.models.Vehicle;
+import com.gm.safedrive.models.VehicleModel;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -26,7 +30,8 @@ public class DbManager extends SQLiteOpenHelper {
 
     // La date et l'heure de maintenant sous forme de chaîne
 
-    private String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+    //private String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+    private String now = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -70,6 +75,8 @@ public class DbManager extends SQLiteOpenHelper {
             Db.QUERY_INSERT_VEHICLE(
                     vehicle.getOwner().getId(),
                     vehicle.getModel().getCode(),
+                    vehicle.getModel().getBrand().getName(),
+                    vehicle.getModel().getName(),
                     now,
                     vehicle.getRegistrationNumber(),
                     vehicle.getModel().getDescription(),
@@ -82,6 +89,20 @@ public class DbManager extends SQLiteOpenHelper {
 
 
 
+    // Supprime un véhicule dans la BD
+
+    public void deleteVehicle(Vehicle vehicle){
+        this.getWritableDatabase().execSQL(
+                Db.QUERY_DELETE_VEHICLE(
+                        vehicle.getId(),
+                        vehicle.getOwner().getId()
+                )
+        );
+        Log.i("DATABASE",now + ": A vehicle was deleted '" + vehicle.getRegistrationNumber() + "'. (deleteVehicle was successful)");
+    }
+
+
+
     // Récupère la liste des véhicules d'un utilisateur
 
     public ArrayList<Vehicle> getSessionUserVehicles(){
@@ -90,15 +111,45 @@ public class DbManager extends SQLiteOpenHelper {
         ArrayList<Vehicle> vehicleList = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery(Db.QUERY_GET_USER_VEHICLES(UserBank.SESSION.getId()), null);
         cursor.moveToFirst();
+
+        String modelCode, modelName, brandName, registration, createdDate;
+        double tankCapacity, distanceCovered;
+        VehicleModel vehicleModel;
         while (!cursor.isAfterLast()){
+            modelCode = cursor.getString(cursor.getColumnIndexOrThrow("model_code"));
+            modelName = cursor.getString(cursor.getColumnIndexOrThrow("model_name"));
+            brandName = cursor.getString(cursor.getColumnIndexOrThrow("brand_name"));
+            registration = cursor.getString(cursor.getColumnIndexOrThrow("registration_number"));
+            createdDate = cursor.getString(cursor.getColumnIndexOrThrow("created_date"));
+            tankCapacity = cursor.getDouble(cursor.getColumnIndexOrThrow("tank_capacity"));
+            distanceCovered = cursor.getDouble(cursor.getColumnIndexOrThrow("distance_covered"));
+
+            vehicleModel = modelBank.getModelByCode(modelCode);
+
+            // A modifier lorsque le traitement des statistiques va commencer
+            // Concrètement, s'il n'y a pas ce modèle déjè pré-enregistré, j'en crée un nouveau que j'affecte
+            if(vehicleModel == null){
+                vehicleModel = new VehicleModel(
+                        modelCode,
+                        (new BrandBank().getBrand(brandName) != null) ? new BrandBank().getBrand(brandName) : new Brand(brandName, 0),
+                        modelName,
+                        "",
+                        new Date().getYear(),
+                        tankCapacity,
+                        new VehicleTypeBank().getAll().get(0),
+                        null
+                );
+            }
+
             vehicleList.add(
                     new Vehicle(
+                            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                             UserBank.SESSION,
-                            cursor.getString(cursor.getColumnIndexOrThrow("created_date")),
-                            cursor.getString(cursor.getColumnIndexOrThrow("registration_number")),
-                            modelBank.getModelByCode(cursor.getString(cursor.getColumnIndexOrThrow("model_code"))),
-                            cursor.getDouble(cursor.getColumnIndexOrThrow("tank_capacity")),
-                            cursor.getDouble(cursor.getColumnIndexOrThrow("distance_covered")),
+                            createdDate,
+                            registration,
+                            vehicleModel,
+                            tankCapacity,
+                            distanceCovered,
                             null
                     )
             );
