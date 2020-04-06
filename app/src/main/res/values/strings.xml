@@ -46,4 +46,10 @@
     <string name="str_default_tank_cap">Default tank cap. :</string>
     <string name="str_current_tank_cap">Current tank cap. :</string>
     <string name="str_dot_distance_covered">Distance covered :</string>
+    <string name="pub_fl_1_title">SafeDrive, everywhere.</string>
+    <string name="pub_fl_2_title">No matter your vehicles.</string>
+    <string name="pub_fl_1_description">SafeDrive is your companion which helps you everyday and everywhere you\'ll need him.</string>
+    <string name="pub_fl_2_description">The main functionality stays the same, we are able to care of your vehicle no matter what type it is.</string>
+    <string name="str_previous">Previous</string>
+    <string name="str_finish">Finish</string>
 </resources>

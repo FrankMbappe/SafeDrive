@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import com.gm.safedrive.models.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class VehiclesActivity extends AppCompatActivity {
     public static final String TAG = "VehiclesActivity";
@@ -53,65 +56,31 @@ public class VehiclesActivity extends AppCompatActivity {
             }
         });
 
-        //initVehiclesList();
-        db = new DbManager(this);
-        // J'initialise la BD, après les tables créees ci-dessus, j'inscris les données de base
-        //db.insertUser(UserBank.SESSION);
-        UserBank.SESSION = db.getUserById(1);
-//        db.insertVehicle(
-//                new Vehicle(
-//                        UserBank.SESSION,
-//                        new Date().toString(),
-//                        "LT950BX",
-//                        new ModelBank().getModelByName("M3 U28"),
-//                        8.4,
-//                        100,
-//                        null
-//                )
-//        );
-//        db.insertVehicle(
-//                new Vehicle(
-//                        UserBank.SESSION,
-//                        new Date().toString(),
-//                        "LT600AF",
-//                        new ModelBank().getModelByName("c-class"),
-//                        8.4,
-//                        100,
-//                        null
-//                )
-//        );
+        mControlRefreshList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(mUsersVehiclesRecyclerview.getAdapter()).notifyDataSetChanged();
+            }
+        });
 
+        mBtnSetCarouselView.setVisibility(View.GONE); mBtnSetListView.setVisibility(View.GONE);
+
+        db = new DbManager(this);
+
+        // Si c'est la première fois que l'utilisateur démarre l'appli, lancement de la méthode prévue à cet effet
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean firstLaunch = preferences.getBoolean(SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH, true);
+        Log.d(TAG, "SafeDrive app's first launch [FLKeyExists=" + preferences.contains(SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH) + ", FLKeyValue=" + firstLaunch + "]" );
+
+        if(firstLaunch){
+            onFirstLaunch();
+        }
+
+        UserBank.SESSION = db.getUserById(1);
         initRecyclerView(db.getSessionUserVehicles());
         db.close();
     }
 
-    public void initVehiclesList(){
-        ModelBank modelBank = new ModelBank();
-        mVehicles.add(
-                new Vehicle(
-                        UserBank.SESSION,
-                        "21/03/2020",
-                        "LT950BX",
-                        modelBank.getModelByName("M3 U28"),
-                        8.4,
-                        100,
-                        null
-                )
-        );
-        mVehicles.add(
-                new Vehicle(
-                        UserBank.SESSION,
-                        "21/03/2020",
-                        "LT600AF",
-                        modelBank.getModelByName("c-class"),
-                        8.4,
-                        100,
-                        null
-                )
-        );
-
-        //initRecyclerView();
-    }
 
     public void initRecyclerView(ArrayList<Vehicle> mVehicles){
         Log.d(TAG, "initRecyclerView: started.");
@@ -122,8 +91,8 @@ public class VehiclesActivity extends AppCompatActivity {
         mUsersVehiclesRecyclerview.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    boolean doubleBackToExitPressedOnce = false;
 
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -140,5 +109,16 @@ public class VehiclesActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+
+    private void onFirstLaunch(){
+        // Insertion de l'utilisateur par défaut [Ronald Reagan] en attendant le module de connexion
+        db.insertUser(UserBank.SESSION);
+
+        // Je sauvegarde la valeur du booléen SAFEDRIVE_ON_FIRST_LAUNCH dans les SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH, false);
+        editor.apply();
     }
 }

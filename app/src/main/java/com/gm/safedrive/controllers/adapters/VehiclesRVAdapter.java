@@ -54,19 +54,6 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
         holder.mBrandName.setText(mVehicles.get(position).getModel().getBrand().getName());
         holder.mModelName.setText(mVehicles.get(position).getModel().getName());
         holder.mRegistrationNumber.setText(mVehicles.get(position).getRegistrationNumber());
-//        final int i = position;
-//        holder.mLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d(TAG, "onClick: clicked on: "+ mVehicles.get(i).getModel().getName());
-//
-//                Toast.makeText(mContext, mVehicles.get(i).getModel().getName(), Toast.LENGTH_SHORT).show();
-//
-//                mToggleButton.setVisibility(View.VISIBLE);
-//                mToggleButton.setEnabled(true);
-//                holder.mLayout.setBackgroundResource(R.color.colorBitDarker);
-//            }
-//        });
     }
 
 

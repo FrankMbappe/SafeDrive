@@ -44,4 +44,10 @@
     <string name="str_default_tank_cap">Cap. réservoir (par défaut) :</string>
     <string name="str_current_tank_cap">Cap. réservoir (actuelle) :</string>
     <string name="str_dot_distance_covered">Kilométrage :</string>
+    <string name="pub_fl_1_title">SafeDrive, avec vous partout.</string>
+    <string name="pub_fl_2_title">Qu\'importe vos véhicules</string>
+    <string name="pub_fl_1_description">SafeDrive est votre compagnon et vous accompagne, vous et vos véhicules, partout où vous allez.</string>
+    <string name="pub_fl_2_description">La fonctionnalité principale reste la même pour tous les types de véhicules, qu\'importe ceux que vous possédez.</string>
+    <string name="str_previous">Précedent</string>
+    <string name="str_finish">Terminer</string>
 </resources>

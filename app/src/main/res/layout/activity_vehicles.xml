@@ -118,6 +118,9 @@
             android:id="@+id/activity_vehicles_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorBitDarker"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             tools:listitem="@layout/item_vehicle_default"/>
     </ScrollView>
 
