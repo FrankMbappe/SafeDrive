@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/item_brand_default_logo"
         android:contentDescription="@string/str_app_logo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/brand_color_chevrolet"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:fontFamily="@font/segoe_ui_regular"
         android:text="Chevrolet"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_brand_default_logo"
         app:layout_constraintTop_toTopOf="parent" />

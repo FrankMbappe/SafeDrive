@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "310553874568",
+    "firebase_url": "https://safedrive-f541b.firebaseio.com",
+    "project_id": "safedrive-f541b",
+    "storage_bucket": "safedrive-f541b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310553874568:android:5fe62dd39c916ab889cf3d",
+        "android_client_info": {
+          "package_name": "com.gm.safedrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310553874568-gvfk2somhv51vocd5hfigs7s07kdq89d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlKSclvY1S6D3p3vvP5jzK-GqRH_S5mI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310553874568-gvfk2somhv51vocd5hfigs7s07kdq89d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

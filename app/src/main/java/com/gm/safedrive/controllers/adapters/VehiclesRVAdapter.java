@@ -2,6 +2,7 @@ package com.gm.safedrive.controllers.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gm.safedrive.R;
 import com.gm.safedrive.banks.UserBank;
+import com.gm.safedrive.banks.VehicleBank;
+import com.gm.safedrive.controllers.MainActivity;
 import com.gm.safedrive.data.DbManager;
 import com.gm.safedrive.models.Vehicle;
 
@@ -120,6 +123,10 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
                     showVehicleInfoDialog();
                     return true;
                 case R.id.menu_item_vehicle_load:
+                    //TODO: Chargement d'un véhicule pour la MainActivity
+                    /* Véhicule chargé */
+                    VehicleBank.LOADED_VEHICLE = mVehicles.get(getAdapterPosition());
+                    mContext.startActivity(new Intent(mContext, MainActivity.class));
                     return true;
                 case R.id.menu_item_vehicle_delete:
                     deleteRecyclerViewItem();

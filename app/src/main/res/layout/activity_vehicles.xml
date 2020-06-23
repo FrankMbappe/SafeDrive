@@ -19,7 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/default_padding"
+        android:paddingTop="@dimen/default_padding"
+        android:paddingStart="@dimen/default_padding"
+        android:paddingEnd="@dimen/default_padding"
+        android:paddingBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_vehicles_header">
@@ -54,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorTransparent"
-            android:src="@drawable/ic_add_black_48dp"
+            android:src="@drawable/ic_add_black_36dp"
             android:contentDescription="@string/str_add_vehicle"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorTransparent"
-            android:src="@drawable/ic_refresh_black_48dp"
+            android:src="@drawable/ic_refresh_black_36dp"
             android:contentDescription="@string/str_refresh"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,6 +80,7 @@
             />
 
 
+<!--
         <ImageButton
             android:id="@+id/activity_vehicles_control_view_list"
             android:layout_width="wrap_content"
@@ -103,9 +107,18 @@
             android:padding="8dp"
             android:layout_margin="8dp"
             />
+-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/activity_vehicles_main_controls_block"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorBitDarker"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -118,7 +131,6 @@
             android:id="@+id/activity_vehicles_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBitDarker"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             tools:listitem="@layout/item_vehicle_default"/>

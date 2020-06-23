@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.gm.safedrive.R;
 import com.gm.safedrive.controllers.interfaces.MainHeaderActivityUser;
+import com.gm.safedrive.controllers.interfaces.MainHeaderFragmentUser;
 
 import java.util.Objects;
 
@@ -42,15 +44,25 @@ public class MainHeaderFragment extends Fragment {
         mBtnMoreMenu = rootView.findViewById(R.id.fragment_header_control_more);
         mContext = rootView.getContext();
 
-        String activityName = "";
+        /* MainHeaderActivityUser et MainHeaderFragmentUser sont des classes semi-interfaces que les activités ou les
+         * fragments utilisant le MainHeaderFragment implémentent pour pouvoir l'utiliser. Je joue donc de ces semi-in
+         * terfaces pour récupérer le nom du parent (à partir de la méthode getActivityName ou getFragmentName de celui-ci).
+         */
+        String parentName = "";
         try{
-            activityName = ((MainHeaderActivityUser) getActivity()).getActivityName();
+            parentName = ((MainHeaderActivityUser) getActivity()).getActivityName();
+            Log.i("FRAGMENT","onCreateView: called. The parent is an activity and its name is " + parentName);
+            mProfilePhoto.setImageResource(((MainHeaderActivityUser) Objects.requireNonNull(getActivity())).getProfilePhotoId());
         }catch (NullPointerException ex){
-            activityName = "";
+            parentName = "";
         }
-        mContextName.setText((activityName != null) ? activityName : "");
-        mProfilePhoto.setImageResource(((MainHeaderActivityUser) Objects.requireNonNull(getActivity())).getProfilePhotoId());
-        Log.i("FRAGMENT","onCreateView: called. The activity name is " + activityName);
+        //TODO: Remarques - Ceci est laborieux. Capturer précisément l'exception du cast ci-dessus
+        catch (Exception ex){
+            parentName = ((MainHeaderFragmentUser) getParentFragment()).getFragmentName();
+            mProfilePhoto.setImageResource(((MainHeaderFragmentUser) Objects.requireNonNull(getParentFragment())).getProfilePhotoId());
+            Log.i("FRAGMENT","onCreateView: called. The parent is a fragment and its name is " + parentName);
+        }
+        mContextName.setText((parentName != null) ? parentName : "");
 
         return rootView;
     }

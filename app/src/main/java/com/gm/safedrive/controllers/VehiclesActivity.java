@@ -46,8 +46,8 @@ public class VehiclesActivity extends AppCompatActivity {
 
         mControlAddVehicle = findViewById(R.id.activity_vehicles_control_add);
         mControlRefreshList = findViewById(R.id.activity_vehicles_control_refresh);
-        mBtnSetListView = findViewById(R.id.activity_vehicles_control_view_list);
-        mBtnSetCarouselView = findViewById(R.id.activity_vehicles_control_view_carousel);
+//        mBtnSetListView = findViewById(R.id.activity_vehicles_control_view_list);
+//        mBtnSetCarouselView = findViewById(R.id.activity_vehicles_control_view_carousel);
 
         mControlAddVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class VehiclesActivity extends AppCompatActivity {
             }
         });
 
-        mBtnSetCarouselView.setVisibility(View.GONE); mBtnSetListView.setVisibility(View.GONE);
+        //mBtnSetCarouselView.setVisibility(View.GONE); mBtnSetListView.setVisibility(View.GONE);
 
         db = new DbManager(this);
 

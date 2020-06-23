@@ -18,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:hint="@string/str_search"
             android:background="@drawable/modern_rounded_textbox_light_gray"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:drawableStart="@drawable/ic_search_black_24dp"
             android:drawablePadding="12dp"/>
 

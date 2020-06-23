@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/default_padding"
     android:id="@+id/item_brand_model_layout"
+    android:background="@android:color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView

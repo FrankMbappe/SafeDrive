@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_main_bnav_home"
+        android:title="@string/str_home"
+        android:icon="@drawable/ic_home"
+        />
+    <item
+        android:id="@+id/menu_main_bnav_stats"
+        android:title="@string/str_statistics"
+        android:icon="@drawable/ic_icons8_statistics"
+        />
+    <item
+        android:id="@+id/menu_main_bnav_reminder"
+        android:title="@string/str_reminders"
+        android:icon="@drawable/ic_icons8_reminder"
+        />
+</menu>
