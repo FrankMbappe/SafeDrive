@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_main_header_option_1"
+        android:id="@+id/menu_main_header_settings"
         android:title="@string/menu_main_header_item_settings"/>
     <item
-        android:id="@+id/menu_main_header_option_2"
+        android:id="@+id/menu_main_header_logout"
         android:title="@string/menu_main_header_item_logout"/>
 </menu>

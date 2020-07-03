@@ -1,9 +1,12 @@
 package com.gm.safedrive.models;
 
+import java.util.ArrayList;
+
 public class User {
     private static int SEQUENCE_VAL = 1;
+    public static final String KEY = "SESSION_USER";
 
-    private int id;
+    private String id;
     private String createdDate;
     private String email;
     private String password;
@@ -14,8 +17,10 @@ public class User {
     private int phoneNumber;
     private String lastTimeConnectedDate;
     private String geographicPosition;
+    private ArrayList<Vehicle> vehicles;
 
-    public User(int id, String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, int profilePhotoId, String lastTimeConnectedDate, String geographicPosition) {
+
+    public User(String id, String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, ArrayList<Vehicle> vehicles){
         this.id = id;
         this.createdDate = createdDate;
         this.email = email;
@@ -23,12 +28,24 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.vehicles = vehicles;
+    }
+
+    public User(String id, String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, ArrayList<Vehicle> vehicles, int profilePhotoId, String lastTimeConnectedDate, String geographicPosition) {
+        this.id = id;
+        this.createdDate = createdDate;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.vehicles = vehicles;
         this.profilePhotoId = profilePhotoId;
         this.lastTimeConnectedDate = lastTimeConnectedDate;
         this.geographicPosition = geographicPosition;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -103,5 +120,17 @@ public class User {
 
     public void setProfilePhotoId(int id){
         this.profilePhotoId = id;
+    }
+
+    public ArrayList<Vehicle> getVehicles(){
+        return vehicles;
+    }
+    public void addVehicle(Vehicle vehicle){
+        if(vehicles != null && vehicle != null){
+            vehicles.add(vehicle);
+        }
+    }
+    public void setVehicles(ArrayList<Vehicle> vehicles){
+        this.vehicles = vehicles;
     }
 }

@@ -165,7 +165,8 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
 
         public void deleteRecyclerViewItem(){
             //TODO: Boîte de dialogue de confirmation de suppression
-            new DbManager(itemView.getContext()).deleteVehicle(mVehicles.get(getAdapterPosition()));
+            // FIREBASE UPDATE HERE
+            // #SQLITE new DbManager(itemView.getContext()).deleteVehicle(mVehicles.get(getAdapterPosition()));
             mVehicles.remove(getAdapterPosition());
             notifyItemRemoved(getAdapterPosition());
             Toast.makeText(itemView.getContext(), "1 item(s) removed.", Toast.LENGTH_SHORT).show();

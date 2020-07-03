@@ -36,8 +36,9 @@ public class DbManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
-            db.execSQL(Db.QUERY_CREATE_TABLE_LOGGED_ACCOUNTS);
-            db.execSQL(Db.QUERY_CREATE_TABLE_VEHICLES);
+            // #SQLITE
+//            db.execSQL(UserFireDbHelper.QUERY_CREATE_TABLE_LOGGED_ACCOUNTS);
+//            db.execSQL(UserFireDbHelper.QUERY_CREATE_TABLE_VEHICLES);
         }catch (SQLException sqlex){
             try {
                 throw new IOException(sqlex);
@@ -70,9 +71,9 @@ public class DbManager extends SQLiteOpenHelper {
 
     // Insère un nouveau véhicule dans la BD
 
-    public void insertVehicle(Vehicle vehicle){
+    /* #SQLITE public void insertVehicle(Vehicle vehicle){
         this.getWritableDatabase().execSQL(
-            Db.QUERY_INSERT_VEHICLE(
+            UserFireDbHelper.QUERY_INSERT_VEHICLE(
                     vehicle.getOwner().getId(),
                     vehicle.getModel().getCode(),
                     vehicle.getModel().getBrand().getName(),
@@ -85,31 +86,31 @@ public class DbManager extends SQLiteOpenHelper {
             )
         );
         Log.i("DATABASE",now + ": new Vehicle added. (insertVehicle was successful)");
-    }
+    }*/
 
 
 
     // Supprime un véhicule dans la BD
 
-    public void deleteVehicle(Vehicle vehicle){
+    /* #SQLITE public void deleteVehicle(Vehicle vehicle){
         this.getWritableDatabase().execSQL(
-                Db.QUERY_DELETE_VEHICLE(
+                UserFireDbHelper.QUERY_DELETE_VEHICLE(
                         vehicle.getId(),
                         vehicle.getOwner().getId()
                 )
         );
         Log.i("DATABASE",now + ": A vehicle was deleted '" + vehicle.getRegistrationNumber() + "'. (deleteVehicle was successful)");
-    }
+    }*/
 
 
 
     // Récupère la liste des véhicules d'un utilisateur
 
-    public ArrayList<Vehicle> getSessionUserVehicles(){
+    /* #SQLITE public ArrayList<Vehicle> getSessionUserVehicles(){
         ModelBank modelBank = new ModelBank();
 
         ArrayList<Vehicle> vehicleList = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().rawQuery(Db.QUERY_GET_USER_VEHICLES(UserBank.SESSION.getId()), null);
+        Cursor cursor = getReadableDatabase().rawQuery(UserFireDbHelper.QUERY_GET_USER_VEHICLES(UserBank.SESSION.getId()), null);
         cursor.moveToFirst();
 
         String modelCode, modelName, brandName, registration, createdDate;
@@ -158,7 +159,7 @@ public class DbManager extends SQLiteOpenHelper {
         cursor.close();
         Log.i("DATABASE",now + ": " + vehicleList.size() + " item(s) sent. (getSessionUserVehicles was successful)");
         return vehicleList;
-    }
+    }*/
 
 
 
@@ -189,23 +190,24 @@ public class DbManager extends SQLiteOpenHelper {
         ArrayList<User> users = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery(Db.QUERY_GET_USER(user_id), null);
         cursor.moveToFirst();
-        if(!cursor.isAfterLast()){
-            User user = new User(
-                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("created_date")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("password")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("first_name")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("last_name")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("phone_number")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("profile_photo_id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("last_time_connected")),
-                    null
-            );
-            Log.i("DATABASE",now + ": user " + user_id + "'s was been found [" + user.getFullName().toUpperCase() + "]. (getUserById was successful)");
-            cursor.close();
-            return user;
-        }
+//        if(!cursor.isAfterLast()){
+//            User user = new User(
+//                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("created_date")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("password")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("first_name")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("last_name")),
+//                    cursor.getInt(cursor.getColumnIndexOrThrow("phone_number")),
+//                    new ArrayList<Vehicle>(),
+//                    cursor.getInt(cursor.getColumnIndexOrThrow("profile_photo_id")),
+//                    cursor.getString(cursor.getColumnIndexOrThrow("last_time_connected")),
+//                    null
+//            );
+//            Log.i("DATABASE",now + ": user " + user_id + "'s was been found [" + user.getFullName().toUpperCase() + "]. (getUserById was successful)");
+//            cursor.close();
+//            return user;
+//        }
         return null;
     }
 

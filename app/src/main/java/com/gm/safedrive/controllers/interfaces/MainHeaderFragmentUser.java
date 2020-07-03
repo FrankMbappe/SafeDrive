@@ -1,5 +1,6 @@
 package com.gm.safedrive.controllers.interfaces;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.gm.safedrive.R;
 import com.gm.safedrive.banks.UserBank;
-import com.gm.safedrive.controllers.fragments.MainHeaderFragment;
+import com.gm.safedrive.controllers.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 /* MainHeaderFragmentUser reprend le même principe que la classe MainHeaderActivityUser, mais avec un fragment à la place
     * d'une activité */
@@ -41,11 +43,14 @@ public class MainHeaderFragmentUser extends Fragment  implements PopupMenu.OnMen
     public boolean onMenuItemClick(MenuItem item) {
         Log.i("FRAGMENT", "onMenuItemClick invoked.");
         switch (item.getItemId()){
-            case R.id.menu_main_header_option_1:
+            case R.id.menu_main_header_settings:
                 Toast.makeText(getActivity(), "Item 1 clicked !",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.menu_main_header_option_2:
+            case R.id.menu_main_header_logout:
+                // Déconnexion
                 Toast.makeText(getActivity(), "Item 2 clicked !",Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 return true;
             default:
                 return false;

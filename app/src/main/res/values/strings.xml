@@ -77,4 +77,22 @@
     <string name="str_init">Initialization</string>
     <string name="str_price">Price</string>
     <string name="str_price_per_l">Price/L</string>
+    <string name="str_email_adress">Email address</string>
+    <string name="str_password">Password</string>
+    <string name="str_log_in">Log in</string>
+    <string name="str_already_have_an_account">Already have an account ?</string>
+    <string name="str_doesn_t_have_an_account">Doesn\'t have an account ?</string>
+    <string name="str_greet_logini">Welcome here, what\'s going on ?</string>
+    <string name="str_sign_up">Sign up</string>
+    <string name="str_your_personal_infos">Your personal informations</string>
+    <string name="str_first_name">First name</string>
+    <string name="str_last_name">Last name</string>
+    <string name="str_your_phone_number">Your phone number</string>
+    <string name="str_phone_number">Phone number</string>
+    <string name="str_your_safedrive_account">Your SafeDrive account</string>
+    <string name="str_confirm_password">Confirm password</string>
+    <string name="str_error_empty_box">You must enter a value here</string>
+    <string name="str_task_error">Sorry, something gone wrong. Please retry</string>
+    <string name="str_you_are_now_logged_in">You are now logged in !</string>
+    <string name="str_you_must_be_logged_in">You must be logged in before continue</string>
 </resources>

@@ -1,12 +1,16 @@
 package com.gm.safedrive.application;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.location.Location;
 
 import com.gm.safedrive.R;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Dictionary;
 
 public class Current {
     private String FullDateFormat = "yyyy/MM/dd HH:mm:ss";
@@ -81,5 +85,29 @@ public class Current {
         return new SimpleDateFormat(TimeFormat).format(date);
     }
 
+    public static void saveToSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
+        String contentPreference = new Gson().toJson(object);
+        SharedPreferences.Editor editor = contextWrapper.getSharedPreferences(preferenceFileKey , Context.MODE_PRIVATE).edit();
+        editor.putString(filePreference , contentPreference);
+        editor.apply();
+    }
+
+
+    public static void clearFromSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
+        String contentPreference = new Gson().toJson(object);
+        SharedPreferences.Editor editor = contextWrapper.getSharedPreferences(preferenceFileKey , Context.MODE_PRIVATE).edit();
+        editor.putString(filePreference , contentPreference);
+        editor.apply();
+        editor.clear();
+    }
+
+    public static Object getFromSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
+        SharedPreferences sharedPref = contextWrapper.getSharedPreferences(preferenceFileKey, Context.MODE_PRIVATE);
+        String member_string = sharedPref.getString(filePreference, null);
+        if(member_string != null) {
+            return new Gson().fromJson(member_string, object.getClass());
+        }
+        return null;
+    }
 
 }

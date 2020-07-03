@@ -10,7 +10,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.gm.safedrive.R;
+import com.gm.safedrive.banks.UserBank;
 import com.gm.safedrive.controllers.VehiclesActivity;
+import com.gm.safedrive.models.User;
+import com.google.gson.Gson;
 
 public class SplashScreenActivity extends AppCompatActivity {
     public static final String TAG = "SplashScreenActivity";
@@ -27,13 +30,22 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 boolean firstLaunch = preferences.getBoolean(SAFEDRIVE_FIRST_TIME_LAUNCH, true);
+                String sessionUserExists = preferences.getString(User.KEY, null);
 
                 if(firstLaunch){
                     Log.d(TAG, "SafeDrive app's first launch [FLKeyExists=" + preferences.contains(SAFEDRIVE_FIRST_TIME_LAUNCH) + ", FLKeyValue=" + firstLaunch + "]" );
                     startActivity(new Intent(SplashScreenActivity.this, FirstPubActivity.class));
                 }
                 else{
-                    startActivity(new Intent(SplashScreenActivity.this, VehiclesActivity.class));
+                    if(sessionUserExists != null){
+                        UserBank.SESSION = new Gson().fromJson(sessionUserExists, User.class);
+                        Log.d(TAG, "A session user already exists [Fullname=" + UserBank.SESSION.getFullName() + ", FirebaseID=" + UserBank.SESSION.getId() + "]" );
+                        startActivity(new Intent(SplashScreenActivity.this, VehiclesActivity.class));
+                    }
+                    else{
+                        Log.d(TAG, "There's no session already opened. Starting LoginActivity..." );
+                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                    }
                 }
             }
         }, 2500);

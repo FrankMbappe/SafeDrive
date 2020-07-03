@@ -123,7 +123,8 @@ public class FinalCVehicleActivity extends AppCompatActivity {
                     Toast.makeText(thisContext, R.string.str_error_values_finalc, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    mDbManager.insertVehicle(getCurrentVehicle());
+                    // FIREBASE UPDATE HERE
+                    // #SQLITE mDbManager.insertVehicle(getCurrentVehicle());
                     openVehicleValidationDialog();
 
                     new Handler().postDelayed(new Runnable() {

@@ -43,10 +43,10 @@ public class MainHeaderActivityUser extends AppCompatActivity  implements PopupM
     public boolean onMenuItemClick(MenuItem item) {
         Log.i("FRAGMENT", "onMenuItemClick invoked.");
         switch (item.getItemId()){
-            case R.id.menu_main_header_option_1:
+            case R.id.menu_main_header_settings:
                 Toast.makeText(this, "Item 1 clicked !",Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.menu_main_header_option_2:
+            case R.id.menu_main_header_logout:
                 Toast.makeText(this, "Item 2 clicked !",Toast.LENGTH_SHORT).show();
                 return true;
             default:

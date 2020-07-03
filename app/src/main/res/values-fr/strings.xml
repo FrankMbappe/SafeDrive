@@ -75,4 +75,22 @@
     <string name="str_init">Initialisation</string>
     <string name="str_price">Prix</string>
     <string name="str_price_per_l">Prix/L</string>
+    <string name="str_email_adress">Adresse e-mail</string>
+    <string name="str_password">Mot de passe</string>
+    <string name="str_already_have_an_account">Déjà un compte ?</string>
+    <string name="str_doesn_t_have_an_account">Pas de compte ?</string>
+    <string name="str_log_in">Se connecter</string>
+    <string name="str_greet_logini">Bienvenue, quoi de neuf ?</string>
+    <string name="str_sign_up">S\'inscrire</string>
+    <string name="str_your_personal_infos">Vos informations personnelles</string>
+    <string name="str_first_name">Prénom</string>
+    <string name="str_last_name">Nom</string>
+    <string name="str_your_phone_number">Votre numéro de téléphone</string>
+    <string name="str_phone_number">Téléphone</string>
+    <string name="str_your_safedrive_account">Votre compte SafeDrive</string>
+    <string name="str_confirm_password">Confirmer le mot de passe</string>
+    <string name="str_error_empty_box">Vous devez entrer une valeur</string>
+    <string name="str_task_error">Désolé,  une erreur s\'est produite. Réessayez à nouveau</string>
+    <string name="str_you_are_now_logged_in">Vous êtes maintenant connecté !</string>
+    <string name="str_you_must_be_logged_in">Vous devez être connecté pour continuer</string>
 </resources>

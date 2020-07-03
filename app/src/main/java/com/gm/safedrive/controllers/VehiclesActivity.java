@@ -65,7 +65,7 @@ public class VehiclesActivity extends AppCompatActivity {
 
         //mBtnSetCarouselView.setVisibility(View.GONE); mBtnSetListView.setVisibility(View.GONE);
 
-        db = new DbManager(this);
+        // #SQLITE db = new DbManager(this);
 
         // Si c'est la première fois que l'utilisateur démarre l'appli, lancement de la méthode prévue à cet effet
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -76,9 +76,9 @@ public class VehiclesActivity extends AppCompatActivity {
             onFirstLaunch();
         }
 
-        UserBank.SESSION = db.getUserById(1);
+        /* #SQLITE UserBank.SESSION = db.getUserById(1);
         initRecyclerView(db.getSessionUserVehicles());
-        db.close();
+        db.close();*/
     }
 
 

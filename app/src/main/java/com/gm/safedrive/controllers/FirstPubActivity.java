@@ -112,7 +112,7 @@ public class FirstPubActivity extends AppCompatActivity {
                 mBtnNext.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(FirstPubActivity.this, VehiclesActivity.class));
+                        startActivity(new Intent(FirstPubActivity.this, LoginActivity.class));
                     }
                 });
             } else {
