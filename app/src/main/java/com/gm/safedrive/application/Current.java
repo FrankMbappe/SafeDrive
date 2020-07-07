@@ -10,9 +10,9 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Dictionary;
 
 public class Current {
+    public static final String SAFEDRIVE_PREFERENCES = "SAFEDRIVE_PREFERENCES";
     private String FullDateFormat = "yyyy/MM/dd HH:mm:ss";
     private String FullTimeFormat = "HH:mm:ss";
     private String DateFormat = "yyyy/MM/dd";
@@ -85,28 +85,55 @@ public class Current {
         return new SimpleDateFormat(TimeFormat).format(date);
     }
 
-    public static void saveToSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
-        String contentPreference = new Gson().toJson(object);
-        SharedPreferences.Editor editor = contextWrapper.getSharedPreferences(preferenceFileKey , Context.MODE_PRIVATE).edit();
-        editor.putString(filePreference , contentPreference);
-        editor.apply();
-    }
+    public static void saveObjectToSharedPreferences (ContextWrapper context, String key, Object object) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(SAFEDRIVE_PREFERENCES, Context.MODE_PRIVATE).edit();
 
-
-    public static void clearFromSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
-        String contentPreference = new Gson().toJson(object);
-        SharedPreferences.Editor editor = contextWrapper.getSharedPreferences(preferenceFileKey , Context.MODE_PRIVATE).edit();
-        editor.putString(filePreference , contentPreference);
-        editor.apply();
-        editor.clear();
-    }
-
-    public static Object getFromSharedPreferences ( Object object, String filePreference, String preferenceFileKey, ContextWrapper contextWrapper ) {
-        SharedPreferences sharedPref = contextWrapper.getSharedPreferences(preferenceFileKey, Context.MODE_PRIVATE);
-        String member_string = sharedPref.getString(filePreference, null);
-        if(member_string != null) {
-            return new Gson().fromJson(member_string, object.getClass());
+        Class<?> objectClass = object.getClass();
+        if (Integer.class.equals(objectClass)) {
+            editor.putInt(key, Integer.parseInt(object.toString()));
         }
+        else if (Boolean.class.equals(objectClass)) {
+            editor.putBoolean(key, Boolean.parseBoolean(object.toString()));
+        }
+        else if(Float.class.equals(objectClass) || Double.class.equals(objectClass)){
+            editor.putFloat(key, Float.parseFloat(object.toString()));
+        }
+        else if(String.class.equals(objectClass)){
+            editor.putString(key, object.toString());
+        }
+        else {
+            String objectToJson = new Gson().toJson(object);
+            editor.putString(key, objectToJson);
+        }
+        editor.apply();
+    }
+    public static void deleteKeyValueFromSharedPreferences (ContextWrapper context, String key) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(SAFEDRIVE_PREFERENCES, Context.MODE_PRIVATE).edit();
+        editor.remove(key);
+        editor.apply();
+    }
+    public static Object getObjectFromSharedPreferences (ContextWrapper context, String key, Class objectClass) {
+        SharedPreferences prefs = context.getSharedPreferences(SAFEDRIVE_PREFERENCES, Context.MODE_PRIVATE);
+
+        if (Integer.class.equals(objectClass)) {
+            return prefs.getInt(key, Integer.MIN_VALUE);
+        }
+        else if (Boolean.class.equals(objectClass)) {
+            return prefs.getBoolean(key, Boolean.FALSE);
+        }
+        else if(Float.class.equals(objectClass) || Double.class.equals(objectClass)){
+            return prefs.getFloat(key, Float.MIN_VALUE);
+        }
+        else if(String.class.equals(objectClass)){
+            return prefs.getString(key, null);
+        }
+        else {
+            String targetObject = prefs.getString(key, null);
+            if(targetObject != null) {
+                return new Gson().fromJson(targetObject, objectClass);
+            }
+        }
+
         return null;
     }
 

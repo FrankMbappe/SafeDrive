@@ -49,10 +49,13 @@ public class User {
         return id;
     }
 
+    public void setId(String id){
+        this.id = id;
+    }
+
     public String getCreatedDate() {
         return createdDate;
     }
-
 
     public String getEmail() {
         return email;
@@ -125,12 +128,15 @@ public class User {
     public ArrayList<Vehicle> getVehicles(){
         return vehicles;
     }
+
     public void addVehicle(Vehicle vehicle){
         if(vehicles != null && vehicle != null){
             vehicles.add(vehicle);
         }
     }
+
     public void setVehicles(ArrayList<Vehicle> vehicles){
         this.vehicles = vehicles;
     }
+
 }

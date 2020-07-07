@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,8 +27,11 @@ import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String TAG = "LoginActivity";
+
     private TextView mSignUpLink;
     private EditText mEmailInput;
     private EditText mPasswordInput;
@@ -35,17 +39,21 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private UserFireDbHelper mUserFireDbHelper;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mSignUpLink = findViewById(R.id.activity_signup_link_login);
+        mSignUpLink = findViewById(R.id.activity_login_signup_link);
         mEmailInput = findViewById(R.id.activity_login_email_input);
         mPasswordInput = findViewById(R.id.activity_login_password_input);
         mLoginBtn = findViewById(R.id.activity_login_btn);
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mUserFireDbHelper = new UserFireDbHelper();
+
+        Current.saveObjectToSharedPreferences(this, SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH, false);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             FirebaseUser mUser = mFirebaseAuth.getCurrentUser();
@@ -61,6 +69,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+        init();
+    }
+
+    private void init(){
         mSignUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,10 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        init();
-    }
-
-    private void init(){
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, getString(R.string.str_task_error), Toast.LENGTH_SHORT).show();
                             }
                             else{
+                                userID = mFirebaseAuth.getUid();
+                                saveSessionUser();
                                 startActivity(new Intent(LoginActivity.this, VehiclesActivity.class));
                             }
                         }
                     });
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, getString(R.string.str_error_empty_box), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -111,24 +124,36 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveSessionUser(){
-//        Calendar c = Calendar.getInstance();
-//        UserBank.SESSION = new User(
-//                mFirebaseAuth.getUid(),
-//                DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime()),
-//                mEmailInput.getText().toString(),
-//                mPasswordInput.getText().toString(),
-//                mFirstNameInput.getText().toString(),
-//                mLastNameInput.getText().toString(),
-//                Integer.parseInt(mPhoneNumberInput.getText().toString())
-//        );
-        // Je sauvegarde l'utilisateur qui s'est connecté comme utilisateur Session, afin de le garder connecté même s'il ferme l'appli
-        // Sauvegarde dans les SharedPreferences
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        // User.KEY sera utilisé pour vérifier si il y déjà une instance d'utilisateur sur l'appareil sur le SplashScreen
-        editor.putString(User.KEY, gson.toJson(UserBank.SESSION));
-        editor.apply();
+        mUserFireDbHelper.read(new UserFireDbHelper.OnlineDataStatus() {
+            @Override
+            public void DataIsLoaded(List<User> users, List<String> keys) {
+                if(userID != null){
+                    User user = UserBank.getUserById(userID, users);
+
+                    if(user != null){
+                        Current.saveObjectToSharedPreferences(LoginActivity.this, User.KEY, user);
+                        Log.d(TAG, "The user found with the id " + userID + "has been successfully saved in shared preferences.");
+                    }
+                }
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+
+
     }
 
 }

@@ -93,4 +93,5 @@
     <string name="str_task_error">Désolé,  une erreur s\'est produite. Réessayez à nouveau</string>
     <string name="str_you_are_now_logged_in">Vous êtes maintenant connecté !</string>
     <string name="str_you_must_be_logged_in">Vous devez être connecté pour continuer</string>
+    <string name="str_error_pwd_confirm_password">La valeur de la confirmation de mot de passe n\'est pas la même que celle du mot de passe !</string>
 </resources>

@@ -5,6 +5,7 @@ import com.gm.safedrive.banks.interfaces.IBank;
 import com.gm.safedrive.models.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserBank {
     public static User SESSION = null;
@@ -36,5 +37,12 @@ public class UserBank {
             }
         }
         else return -1;
+    }
+
+    public static User getUserById(String id, List<User> users){
+        for(User user : users){
+            if(user.getId().equals(id)){ return user; }
+        }
+        return null;
     }
 }

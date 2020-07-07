@@ -161,6 +161,7 @@
             android:textColor="@android:color/white"/>
 
         <TextView
+            android:id="@+id/activity_login_signup_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/str_doesn_t_have_an_account"
