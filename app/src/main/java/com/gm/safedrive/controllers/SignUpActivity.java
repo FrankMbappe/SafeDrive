@@ -1,6 +1,5 @@
 package com.gm.safedrive.controllers;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,13 +13,13 @@ import android.widget.Toast;
 
 import com.gm.safedrive.R;
 import com.gm.safedrive.application.Current;
+import com.gm.safedrive.banks.BrandBank;
+import com.gm.safedrive.banks.UserBank;
+import com.gm.safedrive.banks.VehicleTypeBank;
 import com.gm.safedrive.firebase.UserFireDbHelper;
 import com.gm.safedrive.models.User;
 import com.gm.safedrive.models.Vehicle;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.gm.safedrive.models.VehicleModel;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -38,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPasswordInput;
     private EditText mConfPasswordInput;
     private Button mSignUpBtn;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +51,17 @@ public class SignUpActivity extends AppCompatActivity {
         mPasswordInput = findViewById(R.id.activity_signup_password_input);
         mConfPasswordInput = findViewById(R.id.activity_signup_conf_password_input);
         mSignUpBtn = findViewById(R.id.activity_signup_btn);
-        mAuth = FirebaseAuth.getInstance();
 
         init();
-
-        mLoginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-            }
-        });
     }
 
     private void init(){
+        mLoginLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
+
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,21 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
                     final boolean passwordIsOk = mPasswordInput.getText().toString().equals(mConfPasswordInput.getText().toString());
                     if(passwordIsOk){
                         Log.d(TAG, "init() : Password is okay, Waiting for create user completing.");
-                        mAuth.createUserWithEmailAndPassword(mEmailInput.getText().toString(), mPasswordInput.getText().toString()).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(!task.isSuccessful()){
-                                    Log.d(TAG, "init() : Error ! createUserWithEmailAndPassword task was uncompleted !");
-                                    Toast.makeText(SignUpActivity.this, getString(R.string.str_task_error), Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Log.d(TAG, "init() : createUserWithEmailAndPassword task successfully completed.");
-                                    saveUserToOnlineDb();
-                                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                                }
-                            }
 
-                        });
+                        saveUserToOnlineDb();
                     }
                     else{
                         Log.d(TAG, "init() : Error ! Password and Confirm Password aren't equal !");
@@ -115,40 +98,77 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void saveUserToOnlineDb(){
-        final String userID = (FirebaseAuth.getInstance().getCurrentUser() != null)
-                            ?FirebaseAuth.getInstance().getCurrentUser().getUid()
-                            :"";
-        if(!userID.equals("")){
-            final User signingUpUser = new User(
-                    userID,
-                    DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Calendar.getInstance().getTime()),
-                    mEmailInput.getText().toString(),
-                    mPasswordInput.getText().toString(),
-                    mFirstNameInput.getText().toString(),
-                    mLastNameInput.getText().toString(),
-                    Integer.parseInt(mPhoneNumberInput.getText().toString()),
-                    new ArrayList<Vehicle>(),
-                    0,
-                    "",
-                    ""
-            );
-            new UserFireDbHelper().add(signingUpUser, new UserFireDbHelper.OnlineDataStatus() {
-                @Override
-                public void DataIsLoaded(List<User> users, List<String> keys) { }
-                @Override
-                public void DataIsInserted() {
-                    Log.d(TAG, "saveUserToOnlineDb()> UseFireDbHelper().add() : The user with the ID " + signingUpUser.getId() + " was successfully created");
-                    Toast.makeText(SignUpActivity.this, "The user's account has been succesfully created", Toast.LENGTH_SHORT).show();
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        vehicles.add(new Vehicle(
+                "",
+                DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Calendar.getInstance().getTime()),
+                "LT258B",
+                new VehicleModel(
+                        "POCAYMAN",
+                        new BrandBank().getAll().get(23),
+                        "Cayman",
+                        "Fast",
+                        2006,
+                        8,
+                        new VehicleTypeBank().getAll().get(0),
+                        null
+                ),
+                8,
+                1000,
+                null
+        ));
+        vehicles.add(new Vehicle(
+                "",
+                DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Calendar.getInstance().getTime()),
+                "VXH254",
+                new VehicleModel(
+                        "LaFerrari",
+                        new BrandBank().getAll().get(6),
+                        "LaFerrari",
+                        "Fast",
+                        2014,
+                        9,
+                        new VehicleTypeBank().getAll().get(0),
+                        null
+                ),
+                10,
+                5000,
+                null
+        ));
+        final User signingUpUser = new User(
+                DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(Calendar.getInstance().getTime()),
+                mEmailInput.getText().toString(),
+                mPasswordInput.getText().toString(),
+                mFirstNameInput.getText().toString(),
+                mLastNameInput.getText().toString(),
+                Integer.parseInt(mPhoneNumberInput.getText().toString()),
+                vehicles,
+                0,
+                "",
+                ""
+        );
+
+
+        new UserFireDbHelper().add(signingUpUser, new UserFireDbHelper.OnlineDataStatus() {
+            @Override
+            public void DataIsLoaded(List<User> users, List<String> keys) {
+                Log.d(TAG, "Data is loaded");
+                if(new UserBank().userEmailAlreadyExist(signingUpUser.getEmail(), users)){
+                    Toast.makeText(SignUpActivity.this, "This email address already exists !", Toast.LENGTH_SHORT).show();
                 }
-                @Override
-                public void DataIsUpdated() {}
-                @Override
-                public void DataIsDeleted() {}
-            });
-        }
-        else{
-            Log.d(TAG, "saveUserToOnlineDb() : Error ! The Uid is null and the user wasn't created at all !");
-        }
+            }
+            @Override
+            public void DataIsInserted() {
+                Log.d(TAG, "Data is inserted");
+                Log.d(TAG, "saveUserToOnlineDb()> UseFireDbHelper().add() : The user with the email " + signingUpUser.getEmail() + " was successfully created");
+                Toast.makeText(SignUpActivity.this, "The user's account has been succesfully created", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+            @Override
+            public void DataIsUpdated() {}
+            @Override
+            public void DataIsDeleted() {}
+        });
     }
 
 }

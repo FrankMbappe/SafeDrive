@@ -9,6 +9,9 @@ public class Operation {
     private String Title;
     private String Location;
 
+    public Operation(){
+
+    }
     public Operation(User author, OperationType type, java.util.Date date, String title, String location) {
         Author = author;
         Type = type;

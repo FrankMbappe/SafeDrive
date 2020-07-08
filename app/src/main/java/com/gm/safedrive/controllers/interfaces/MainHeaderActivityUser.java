@@ -1,5 +1,6 @@
 package com.gm.safedrive.controllers.interfaces;
 
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MainHeaderActivityUser extends AppCompatActivity  implements PopupM
         return "";
     }
     public int getProfilePhotoId(){
-        return UserBank.getSessionProfilePhotoId();
+        return UserBank.getProfilePhotoId(new UserBank().getSessionUser((ContextWrapper) getBaseContext()));
     }
 
     /* POPUP MENU :

@@ -14,6 +14,9 @@ public class VehicleModel {
     private VehicleType vehicleType;
     private SafeDriveStatistics statistics;
 
+    public VehicleModel(){
+
+    }
     public VehicleModel(String code, Brand brand, String name, String description, int releaseYear, double tankCapacity, VehicleType vehicleType, SafeDriveStatistics statistics) {
         this.code = code;
         this.brand = brand;

@@ -2,7 +2,7 @@ package com.gm.safedrive.models;
 
 public class Vehicle {
     private int id;
-    private User owner;
+    private String ownerId;
     private String createdDate;
     private String registrationNumber;
     private VehicleModel model;
@@ -10,9 +10,12 @@ public class Vehicle {
     private double distanceCovered;
     private SafeDriveStatistics statistics;
 
-    public Vehicle(int id, User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
+    public Vehicle(){
+
+    }
+    public Vehicle(int id, String ownerId, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
         this.id = id;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.createdDate = createdDate;
         this.registrationNumber = registrationNumber;
         this.model = model;
@@ -21,8 +24,8 @@ public class Vehicle {
         this.statistics = statistics;
     }
 
-    public Vehicle(User owner, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
-        this.owner = owner;
+    public Vehicle(String ownerId, String createdDate, String registrationNumber, VehicleModel model, double tankCapacity, double distanceCovered,  SafeDriveStatistics statistics) {
+        this.ownerId = ownerId;
         this.createdDate = createdDate;
         this.registrationNumber = registrationNumber;
         this.model = model;
@@ -35,12 +38,16 @@ public class Vehicle {
         return this.id;
     }
 
-    public User getOwner() {
-        return owner;
+    public void setId(int id){
+        this.id = id;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getCreatedDate() {

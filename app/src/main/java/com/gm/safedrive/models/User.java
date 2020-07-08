@@ -20,6 +20,9 @@ public class User {
     private ArrayList<Vehicle> vehicles;
 
 
+    public User(){
+        
+    }
     public User(String id, String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, ArrayList<Vehicle> vehicles){
         this.id = id;
         this.createdDate = createdDate;
@@ -33,6 +36,18 @@ public class User {
 
     public User(String id, String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, ArrayList<Vehicle> vehicles, int profilePhotoId, String lastTimeConnectedDate, String geographicPosition) {
         this.id = id;
+        this.createdDate = createdDate;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.vehicles = vehicles;
+        this.profilePhotoId = profilePhotoId;
+        this.lastTimeConnectedDate = lastTimeConnectedDate;
+        this.geographicPosition = geographicPosition;
+    }
+    public User(String createdDate, String email, String password, String firstName, String lastName, int phoneNumber, ArrayList<Vehicle> vehicles, int profilePhotoId, String lastTimeConnectedDate, String geographicPosition) {
         this.createdDate = createdDate;
         this.email = email;
         this.password = password;
@@ -134,7 +149,20 @@ public class User {
             vehicles.add(vehicle);
         }
     }
-
+    public void updateVehicle(int id, Vehicle vehicle){
+        for(Vehicle v : vehicles){
+            if(v.getId() == id){
+                v = vehicle;
+            }
+        }
+    }
+    public void deleteVehicle(int id){
+        for(Vehicle v : vehicles){
+            if(v.getId() == id){
+                vehicles.remove(v);
+            }
+        }
+    }
     public void setVehicles(ArrayList<Vehicle> vehicles){
         this.vehicles = vehicles;
     }

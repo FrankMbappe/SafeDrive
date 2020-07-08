@@ -58,9 +58,13 @@ public class MainHeaderFragment extends Fragment {
         }
         //TODO: Remarques - Ceci est laborieux. Capturer précisément l'exception du cast ci-dessus
         catch (Exception ex){
-            parentName = ((MainHeaderFragmentUser) getParentFragment()).getFragmentName();
-            mProfilePhoto.setImageResource(((MainHeaderFragmentUser) Objects.requireNonNull(getParentFragment())).getProfilePhotoId());
-            Log.i("FRAGMENT","onCreateView: called. The parent is a fragment and its name is " + parentName);
+            if(getParentFragment() != null){
+                parentName = ((MainHeaderFragmentUser) getParentFragment()).getFragmentName();
+                mProfilePhoto.setImageResource(((MainHeaderFragmentUser) Objects.requireNonNull(getParentFragment())).getProfilePhotoId());
+                Log.i("FRAGMENT","onCreateView: called. The parent is a fragment and its name is " + parentName);
+            }else {
+                parentName = "";
+            }
         }
         mContextName.setText((parentName != null) ? parentName : "");
 

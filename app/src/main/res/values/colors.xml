@@ -11,4 +11,5 @@
     <color name="colorDarker">#90000000</color>
     <color name="lightGray">#E6E6E6</color>
     <color name="colorOptimalBlue">#307DF7</color>
+    <color name="colorOptimalBlueDark">#1456BD</color>
 </resources>

@@ -7,6 +7,9 @@ public class VehicleType {
     private int nameId;
     private int logoId;
 
+    public VehicleType(){
+
+    }
     public VehicleType(int nameId, int logoId) {
         this.id = SEQUENCE_VAL++;
         this.nameId = nameId;

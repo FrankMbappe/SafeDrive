@@ -6,6 +6,9 @@ public class OperationType {
     private int MainColorId;
     private int TitleStringId;
 
+    public OperationType(){
+
+    }
     public OperationType(String id, int logoDrawableId, int mainColorId, int titleStringId) {
         Id = id;
         LogoDrawableId = logoDrawableId;

@@ -94,4 +94,7 @@
     <string name="str_you_are_now_logged_in">Vous êtes maintenant connecté !</string>
     <string name="str_you_must_be_logged_in">Vous devez être connecté pour continuer</string>
     <string name="str_error_pwd_confirm_password">La valeur de la confirmation de mot de passe n\'est pas la même que celle du mot de passe !</string>
+    <string name="str_no_user_found">Aucun utilisateur trouvé avec ces paramètres ! Veuillez réessayer</string>
+    <string name="str_logged_in_as">Connecté en tant que %s</string>
+    <string name="str_user_success_update">Vos données ont été mises à jour avec succès.</string>
 </resources>

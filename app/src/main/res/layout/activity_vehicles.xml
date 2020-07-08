@@ -14,6 +14,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <RelativeLayout
+        android:id="@+id/activity_vehicles_connected_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@color/colorOptimalBlueDark"
+        app:layout_constraintTop_toBottomOf="@id/activity_vehicles_header">
+        <TextView
+            android:id="@+id/activity_vehicles_logged_in_user_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_logged_in_as"
+            android:layout_centerInParent="true"
+            android:textSize="17sp"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+
     <LinearLayout
         android:id="@+id/activity_vehicles_global_name_block"
         android:layout_width="match_parent"
@@ -25,7 +46,7 @@
         android:paddingBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_vehicles_header">
+        app:layout_constraintTop_toBottomOf="@id/activity_vehicles_connected_popup">
 
         <TextView
             android:layout_width="wrap_content"

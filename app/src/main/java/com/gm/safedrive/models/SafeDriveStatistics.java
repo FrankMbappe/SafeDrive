@@ -3,6 +3,9 @@ package com.gm.safedrive.models;
 public class SafeDriveStatistics {
     private double tankAutonomy;
 
+    public SafeDriveStatistics(){
+
+    }
     public SafeDriveStatistics(double tankAutonomy) {
         this.tankAutonomy = tankAutonomy;
     }

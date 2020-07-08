@@ -1,8 +1,11 @@
 package com.gm.safedrive.firebase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.gm.safedrive.models.User;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserFireDbHelper {
+    public static final String TAG = "UserFireDbHelper";
     public static final String PATH = "users";
     FirebaseDatabase database;
     DatabaseReference usersDbReference;
@@ -27,23 +31,38 @@ public class UserFireDbHelper {
     }
 
     public UserFireDbHelper(){
+        users = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         usersDbReference = database.getReference(PATH);
     }
 
     public void add(User user, final OnlineDataStatus dataStatus){
         String key = usersDbReference.push().getKey();
-        assert key != null;
-        usersDbReference.child(key).setValue(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        dataStatus.DataIsInserted();
-                    }
-                });
+        if(key != null){
+            Log.d(TAG, "Key is not null");
+            usersDbReference.child(key).setValue(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dataStatus.DataIsInserted();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "Failed to add user.");
+                        }
+                    });
+        }
     }
-    public void update(String id, User user){
-        usersDbReference.child(id).setValue(user);
+    public void update(String key, User user, final OnlineDataStatus dataStatus){
+       usersDbReference.child(key).setValue(user)
+               .addOnSuccessListener(new OnSuccessListener<Void>() {
+                   @Override
+                   public void onSuccess(Void aVoid) {
+                        dataStatus.DataIsUpdated();
+                   }
+               });
     }
     public void remove(String id){
         usersDbReference.child(id).removeValue();
@@ -56,7 +75,12 @@ public class UserFireDbHelper {
                 List<String> keys = new ArrayList<>();
                 for(DataSnapshot dbObject : snapshot.getChildren()){
                      keys.add(dbObject.getKey());
-                     users.add(dbObject.getValue(User.class));
+                     User user = dbObject.getValue(User.class);
+                     if(user != null){
+                         //user.setId(dbObject.child("uid").getValue(String.class));
+                         user.setId(dbObject.getKey());
+                         users.add(user);
+                     }
                 }
                 dataStatus.DataIsLoaded(users, keys);
             }
@@ -66,29 +90,5 @@ public class UserFireDbHelper {
 
             }
         });
-    }
-    public boolean userAccountIsOkay(User user, List<User> users){
-        // Pourra être modifié si je veux ajouter de nouveaux paramètres qui déterminent qu'un uti-
-        // lisateur est valide
-        boolean isOkay = true;
-        if(users != null && user != null){
-            for(User u : users){
-                if(user.getEmail().toLowerCase().equals(u.getEmail().toLowerCase())){
-                    isOkay = false;
-                }
-            }
-        }
-        return isOkay;
-    }
-    public User getUserByEmailAndPassword(String email, String password, List<User> listOfUsers){
-        if(listOfUsers != null && email != null && password != null){
-            for(User user : listOfUsers){
-                if(user.getEmail().toLowerCase().equals(email.toLowerCase())
-                        && user.getPassword().equals(password)){
-                    return user;
-                }
-            }
-        }
-        return null;
     }
 }

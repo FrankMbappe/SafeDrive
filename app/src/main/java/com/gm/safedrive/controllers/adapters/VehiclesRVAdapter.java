@@ -2,6 +2,7 @@ package com.gm.safedrive.controllers.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
@@ -27,9 +28,12 @@ import com.gm.safedrive.banks.UserBank;
 import com.gm.safedrive.banks.VehicleBank;
 import com.gm.safedrive.controllers.MainActivity;
 import com.gm.safedrive.data.DbManager;
+import com.gm.safedrive.firebase.UserFireDbHelper;
+import com.gm.safedrive.models.User;
 import com.gm.safedrive.models.Vehicle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.ViewHolder>{
     private static final String TAG = "VehiclesRVAdapter";
@@ -151,7 +155,7 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
             TextView distanceCovered = dialog.findViewById(R.id.dialog_vehicle_distance_covered);
 
             addDate.setText(mVehicles.get(getAdapterPosition()).getCreatedDate());
-            userName.setText(UserBank.SESSION.getFullName());
+            userName.setText(new UserBank().getSessionUser((ContextWrapper) itemView.getContext()).getFullName());
             brandName.setText(mVehicles.get(getAdapterPosition()).getModel().getBrand().getName());
             modelName.setText(mVehicles.get(getAdapterPosition()).getModel().getName());
             registrationNumber.setText(mVehicles.get(getAdapterPosition()).getRegistrationNumber());
@@ -165,11 +169,37 @@ public class VehiclesRVAdapter extends RecyclerView.Adapter<VehiclesRVAdapter.Vi
 
         public void deleteRecyclerViewItem(){
             //TODO: Boîte de dialogue de confirmation de suppression
+
             // FIREBASE UPDATE HERE
-            // #SQLITE new DbManager(itemView.getContext()).deleteVehicle(mVehicles.get(getAdapterPosition()));
-            mVehicles.remove(getAdapterPosition());
-            notifyItemRemoved(getAdapterPosition());
-            Toast.makeText(itemView.getContext(), "1 item(s) removed.", Toast.LENGTH_SHORT).show();
+            User sessionUser = new UserBank().getSessionUser((ContextWrapper) mContext);
+
+            // CHECK DELETING HERE DUDE!!
+            sessionUser.deleteVehicle(mVehicles.get(getAdapterPosition()).getId());
+            new UserFireDbHelper().update(sessionUser.getId(), sessionUser, new UserFireDbHelper.OnlineDataStatus() {
+                @Override
+                public void DataIsLoaded(List<User> users, List<String> keys) {
+
+                }
+
+                @Override
+                public void DataIsInserted() {
+
+                }
+
+                @Override
+                public void DataIsUpdated() {
+                    mVehicles.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    Toast.makeText(itemView.getContext(), "1 item(s) has been removed.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "User vehicle list has been updated.");
+                }
+
+                @Override
+                public void DataIsDeleted() {
+
+                }
+            });
+            new UserBank().updateSessionUserFromOnlineDb((ContextWrapper) mContext);
         }
     }
 }

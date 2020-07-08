@@ -96,4 +96,7 @@
     <string name="str_you_are_now_logged_in">You are now logged in !</string>
     <string name="str_you_must_be_logged_in">You must be logged in before continue</string>
     <string name="str_error_pwd_confirm_password">The \'Confirm password\' value isn\'t the same as the \'Password\' value !</string>
+    <string name="str_no_user_found">There\'s no user found with this paremeters ! Veuillez réessayer</string>
+    <string name="str_logged_in_as">Logged in as %s</string>
+    <string name="str_user_success_update">Your account data has been successfully updated.</string>
 </resources>

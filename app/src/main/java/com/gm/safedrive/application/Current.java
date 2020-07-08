@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.util.Log;
 
 import com.gm.safedrive.R;
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Current {
+    public static final String TAG = "Current";
     public static final String SAFEDRIVE_PREFERENCES = "SAFEDRIVE_PREFERENCES";
     private String FullDateFormat = "yyyy/MM/dd HH:mm:ss";
     private String FullTimeFormat = "HH:mm:ss";
@@ -86,22 +88,28 @@ public class Current {
     }
 
     public static void saveObjectToSharedPreferences (ContextWrapper context, String key, Object object) {
+        Log.d(TAG, "saveObjectToSharedPreferences() method called.");
         SharedPreferences.Editor editor = context.getSharedPreferences(SAFEDRIVE_PREFERENCES, Context.MODE_PRIVATE).edit();
 
         Class<?> objectClass = object.getClass();
         if (Integer.class.equals(objectClass)) {
+            Log.d(TAG, "saveObjectToSharedPreferences() : The object is an Integer");
             editor.putInt(key, Integer.parseInt(object.toString()));
         }
         else if (Boolean.class.equals(objectClass)) {
+            Log.d(TAG, "saveObjectToSharedPreferences() : The object is a Boolean");
             editor.putBoolean(key, Boolean.parseBoolean(object.toString()));
         }
         else if(Float.class.equals(objectClass) || Double.class.equals(objectClass)){
+            Log.d(TAG, "saveObjectToSharedPreferences() : The object is a Float");
             editor.putFloat(key, Float.parseFloat(object.toString()));
         }
         else if(String.class.equals(objectClass)){
+            Log.d(TAG, "saveObjectToSharedPreferences() : The object is a String");
             editor.putString(key, object.toString());
         }
         else {
+            Log.d(TAG, "saveObjectToSharedPreferences() : The object is a " + objectClass.toString());
             String objectToJson = new Gson().toJson(object);
             editor.putString(key, objectToJson);
         }

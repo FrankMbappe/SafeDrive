@@ -24,8 +24,9 @@ import com.gm.safedrive.banks.ModelBank;
 import com.gm.safedrive.banks.UserBank;
 import com.gm.safedrive.banks.VehicleTypeBank;
 import com.gm.safedrive.controllers.fragments.dialogs.VehicleValidationDialog;
-import com.gm.safedrive.data.DbManager;
+import com.gm.safedrive.firebase.UserFireDbHelper;
 import com.gm.safedrive.models.Brand;
+import com.gm.safedrive.models.User;
 import com.gm.safedrive.models.Vehicle;
 import com.gm.safedrive.models.VehicleModel;
 import com.google.gson.Gson;
@@ -34,6 +35,7 @@ import com.google.gson.GsonBuilder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.gm.safedrive.application.SafeDrive.MAIN_CHANNEL_ID;
 
@@ -41,7 +43,6 @@ public class FinalCVehicleActivity extends AppCompatActivity {
     public static final String TAG = "FinalCVehicleActivity";
     public static final String EXTRA_CURRENT_MODEL = "EXTRA_CURRENT_MODEL";
     private NotificationManagerCompat mNotificationManager;
-    private DbManager mDbManager;
     private VehicleModel mCurrentModel;
 
     private ImageView mBrandLogo;
@@ -60,7 +61,6 @@ public class FinalCVehicleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_final_c_vehicle);
 
         mNotificationManager = NotificationManagerCompat.from(this);
-        mDbManager = new DbManager(this);
         mCurrentModel = new ModelBank().getAll().get(0);
 
         Gson gson = new GsonBuilder().create();
@@ -124,7 +124,8 @@ public class FinalCVehicleActivity extends AppCompatActivity {
                 }
                 else {
                     // FIREBASE UPDATE HERE
-                    // #SQLITE mDbManager.insertVehicle(getCurrentVehicle());
+                    saveTheNewVehicle();
+
                     openVehicleValidationDialog();
 
                     new Handler().postDelayed(new Runnable() {
@@ -152,10 +153,41 @@ public class FinalCVehicleActivity extends AppCompatActivity {
     }
 
 
+    public void saveTheNewVehicle(){
+        final User sessionUser = new UserBank().getSessionUser(this);
 
+        // J'ajoute un Id au véhicule pour pouvoir le reférencer plus tard
+        Vehicle vehicle = getCurrentVehicle();
+        vehicle.setId(sessionUser.getVehicles().size());
+        sessionUser.addVehicle(vehicle);
 
+        // Partie 1 : Lui ayant ajouté un nouveau véhicule, je met à jour l'utilisateur directement dans la BD en ligne
+        // Partie 2 : Je met à jour l'utilisateur dans les SharedPreferences à partir de la BD en ligne
 
+        /* 1 */  new UserFireDbHelper().update(sessionUser.getId(), sessionUser, new UserFireDbHelper.OnlineDataStatus() {
+            @Override
+            public void DataIsLoaded(List<User> users, List<String> keys) {
+                Log.d(TAG, "Data is loaded");
+            }
 
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+                Toast.makeText(FinalCVehicleActivity.this, getString(R.string.str_user_success_update), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "The user with email=" + sessionUser.getEmail() + " and id=" + sessionUser.getId() + " has been updated.");
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+        /* 2 */  new UserBank().updateSessionUserFromOnlineDb(this);
+    }
 
     private Brand getCurrentBrand(String brandName){
         ArrayList<Brand> brands = new BrandBank().getBrands(brandName);
@@ -168,7 +200,7 @@ public class FinalCVehicleActivity extends AppCompatActivity {
     // Un véhicule à partir des paramètres actuels
     public Vehicle getCurrentVehicle(){
         return new Vehicle(
-                UserBank.SESSION,
+                new UserBank().getSessionUser(this).getId(),
                 new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()),
                 mRegistrationInput.getText().toString(),
                 getCurrentModel(),
@@ -178,10 +210,8 @@ public class FinalCVehicleActivity extends AppCompatActivity {
         );
     }
 
-
     /* Méthode qui retourne un objet VehicleModel à l'aide des paramètres actuels et qui retourne l'objet originel(currentModel) si les
     * paramètres n'ont pas été modifiés (Nom de la condition : nameIsSetToDefault)*/
-
     public VehicleModel getCurrentModel(){
         // Cette ligne n'a aucun effet si l'utilisateur n'a pas modifié le nom de la marque TODO: Entrer le nom de la marque par voie vocale
         mCurrentModel.setBrand(getCurrentBrand(mBrandNameInput.getText().toString()));

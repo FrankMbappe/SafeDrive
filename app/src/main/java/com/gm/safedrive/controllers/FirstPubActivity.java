@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gm.safedrive.R;
+import com.gm.safedrive.application.Current;
 import com.gm.safedrive.controllers.adapters.SliderAdapter;
 
 public class FirstPubActivity extends AppCompatActivity {
@@ -59,6 +62,10 @@ public class FirstPubActivity extends AppCompatActivity {
         });
 
         addDotsIndicator(0);
+
+        // Ce n'est plus la première fois qu'on ouvre l'appli
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putBoolean(SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH, false).apply();
     }
 
     public void addDotsIndicator(int position){

@@ -11,31 +11,25 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gm.safedrive.R;
-import com.gm.safedrive.banks.ModelBank;
 import com.gm.safedrive.banks.UserBank;
 import com.gm.safedrive.controllers.adapters.VehiclesRVAdapter;
-import com.gm.safedrive.data.DbManager;
 import com.gm.safedrive.models.Vehicle;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 public class VehiclesActivity extends AppCompatActivity {
     public static final String TAG = "VehiclesActivity";
-    private ArrayList<Vehicle> mVehicles = new ArrayList<>();
-    private DbManager db;
 
     private ImageButton mControlAddVehicle;
     private ImageButton mControlRefreshList;
-    private ImageButton mBtnSetListView;
-    private ImageButton mBtnSetCarouselView;
     private RecyclerView mUsersVehiclesRecyclerview;
+    private TextView mLoggedInAs;
 
 
     @Override
@@ -46,8 +40,10 @@ public class VehiclesActivity extends AppCompatActivity {
 
         mControlAddVehicle = findViewById(R.id.activity_vehicles_control_add);
         mControlRefreshList = findViewById(R.id.activity_vehicles_control_refresh);
-//        mBtnSetListView = findViewById(R.id.activity_vehicles_control_view_list);
-//        mBtnSetCarouselView = findViewById(R.id.activity_vehicles_control_view_carousel);
+        mLoggedInAs = findViewById(R.id.activity_vehicles_logged_in_user_output);
+
+
+        mLoggedInAs.setText(String.format(getString(R.string.str_logged_in_as), new UserBank().getSessionUser(this).getFullName()));
 
         mControlAddVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +59,6 @@ public class VehiclesActivity extends AppCompatActivity {
             }
         });
 
-        //mBtnSetCarouselView.setVisibility(View.GONE); mBtnSetListView.setVisibility(View.GONE);
-
-        // #SQLITE db = new DbManager(this);
-
         // Si c'est la première fois que l'utilisateur démarre l'appli, lancement de la méthode prévue à cet effet
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean firstLaunch = preferences.getBoolean(SplashScreenActivity.SAFEDRIVE_FIRST_TIME_LAUNCH, true);
@@ -76,9 +68,10 @@ public class VehiclesActivity extends AppCompatActivity {
             onFirstLaunch();
         }
 
-        /* #SQLITE UserBank.SESSION = db.getUserById(1);
-        initRecyclerView(db.getSessionUserVehicles());
-        db.close();*/
+        new UserBank().updateSessionUserFromOnlineDb(this);
+
+        // TODO: initRecyclerView()
+        initRecyclerView(new UserBank().getSessionUser(this).getVehicles());
     }
 
 
@@ -112,9 +105,6 @@ public class VehiclesActivity extends AppCompatActivity {
     }
 
     private void onFirstLaunch(){
-        // Insertion de l'utilisateur par défaut [Ronald Reagan] en attendant le module de connexion
-        db.insertUser(UserBank.SESSION);
-
         // Je sauvegarde la valeur du booléen SAFEDRIVE_ON_FIRST_LAUNCH dans les SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
